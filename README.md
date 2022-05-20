@@ -21,7 +21,7 @@ npx create-react-app hangout-nwitter-with-nomad
     ```
     ```javascript
     // set SDK 
-    // firebase.js
+    // fbase.js
     import { initializeApp } from "firebase/app";
 
     const firebaseConfig = {
