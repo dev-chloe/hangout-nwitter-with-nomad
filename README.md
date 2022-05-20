@@ -77,4 +77,12 @@ npx create-react-app hangout-nwitter-with-nomad
     > **REACT_APP_로 시작하는 환경 변수만 읽도록 설정되어 있으므로 반드시 REACT_APP_로 시작해야 한다.**
 
     - [참조](https://db2dev.tistory.com/entry/React-Webpack%EC%9C%BC%EB%A1%9C-%EA%B5%AC%EC%B6%95%ED%95%9C-React-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90%EC%84%9C-%ED%99%98%EA%B2%BD-%EB%B3%80%EC%88%98env-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
+    ```
+
+3. [**ReactRouter**](https://reactrouter.com/)
+
+    ```bash
+    # react router
+    npm install react-router-dom
+    ```
 
