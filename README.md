@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Nwitter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Twitter (mini)clone with React and Firebase
 
-## Available Scripts
+## Project
 
-In the project directory, you can run:
+### Initiation
 
-### `npm start`
+```bash
+# Create new react project
+npx create-react-app hangout-nwitter-with-nomad
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Set dependencies
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. [**firebase**](https://firebase.google.com/)
+    > 구글에서 운영하고 있는 웹, 모바일 개발 플랫폼이다.
+    ```bash
+    # firebase
+    npm install --save firebase
+    ```
+    ```javascript
+    // set SDK 
+    // firebase.js
+    import { initializeApp } from "firebase/app";
 
-### `npm test`
+    const firebaseConfig = {
+      apiKey: process.env.FB_API_KEY,
+      authDomain: process.env.FB_AUTH_DOMAIN,
+      projectId: process.env.FB_PROJECT_ID,
+      storageBucket: process.env.FB_STORAGE_BUCKET,
+      messagingSenderId: process.env.FB_MESSAGING_SENDER_ID,
+      appId: process.env.FB_APP_ID
+    };
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    const app = initializeApp(firebaseConfig);
+    ```
 
-### `npm run build`
+2. [**dotenv**](https://www.npmjs.com/package/dotenv)
+    > Node.js 서버의 포트, DB 관련정보등 다양한 정보를 .env 파일로 관리할 수 있게 해주는 Node.js 패키지이다.
+    ```bash
+    # dotenv
+    npm install dotenv --save
+    ```
+    ```javascript
+    // set .env 
+    // .evn
+    FB_API_KEY="__SENSITIVE__"
+    FB_AUTH_DOMAIN="__SENSITIVE__"
+    FB_PROJECT_ID="__SENSITIVE__"
+    FB_STORAGE_BUCKET="__SENSITIVE__"
+    FB_MESSAGING_SENDER_ID="__SENSITIVE__"
+    FB_APP_ID="__SENSITIVE__"
+    ```
+    > env 파일에 선언한 변수를 process.env에 로드해주는 무의존성(zero-dependency) 모듈이다.  
+    > React의 자바스크립트 파일은 node.js 그 자체가 아니기 때문에 필요한 패키지를 설치 후 import해서 의존적으로 사용하기 때문에 추가적인 파일 설정이 필요하다.
+    ```javascript
+    // set webpack.config 
+    // webpack.config.js
+    const webpack = require('webpack');
+    const dotenv = require('dotenv');
+      
+    dotenv.config();
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    module.exports = {
+      plugins: [
+        new webpack.DefinePlugin({
+          "process.env": JSON.stringify(process.env),
+        })
+      ]
+    }
+    ```
+    > Webpack의 DefinePlugin을 사용해 process.env라는 전역 변수를 정의해준다.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
