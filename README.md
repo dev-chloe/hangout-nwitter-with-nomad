@@ -36,6 +36,12 @@ npx create-react-app hangout-nwitter-with-nomad
     const app = initializeApp(firebaseConfig);
     ```
 
+    - Authentication setting
+      - go Authentication section in firebase consloe
+      - choose Sign-in providers(ex, google, email, github..)
+      - github setting needs to set up in github.
+        - settings > Developer settings > OAuth apps
+
 2. [**dotenv**](https://www.npmjs.com/package/dotenv)
     > Node.js 서버의 포트, DB 관련정보등 다양한 정보를 .env 파일로 관리할 수 있게 해주는 Node.js 패키지이다.
     ```bash
