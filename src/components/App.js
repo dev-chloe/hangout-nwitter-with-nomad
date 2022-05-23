@@ -4,15 +4,15 @@ import { getAuth } from "firebase/auth";
 
 function App() {
   const [init, setInit] = useState(false);
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const auth = getAuth();
     auth.onAuthStateChanged(function (user) {
       console.log(user)
       if (user) {
-        setisLoggedIn(true);
+        setIsLoggedIn(true);
       } else {
-        setisLoggedIn(false);
+        setIsLoggedIn(false);
       }
       setInit(true);
     })

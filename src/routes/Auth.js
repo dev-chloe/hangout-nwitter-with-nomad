@@ -1,13 +1,12 @@
-import { authService } from "fBase";
-import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 
-import BasicUserSerivce from "../services/user/BasicUserService"
+import BasicUserSerivce from "services/user/BasicUserService"
+import SocialUserService, { socialBtnName } from "services/user/SocialUserService";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isNewAccount, setNewAccount] = useState(true);
+  const [isNewAccount, setIsNewAccount] = useState(true);
   const [error, setError] = useState("");
 
   const onChange = (event) => {
@@ -19,7 +18,7 @@ const Auth = () => {
     }
   }
   const toggleNewAccount = () => {
-    setNewAccount((prev) => !prev);
+    setIsNewAccount((prev) => !prev);
   }
 
   const onSubmit = async (event) => {
@@ -35,15 +34,9 @@ const Auth = () => {
   
   const onSocialClick = async (event) => {
     const { target: { name } } = event;
-    let provider;
-    if (name === "google") {
-      provider = new GoogleAuthProvider();
-    } else if (name === "github") {
-      provider = new GithubAuthProvider();
-    }
-    const data = await signInWithPopup(authService, provider);
-    console.log(data);
+    await SocialUserService.login(name);
   }
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -68,8 +61,9 @@ const Auth = () => {
       </form>
       <span onClick={toggleNewAccount}>{isNewAccount ? "Sign In" : "Create Account"}</span>
       <div>
-        <button name="google" onClick={onSocialClick}>Continue with Google</button>
-        <button name="github" onClick={onSocialClick}>Continue with Github</button>
+        <button name={socialBtnName.google} onClick={onSocialClick}>Continue with Google</button>
+        <button name={socialBtnName.github} onClick={onSocialClick}>Continue with Github</button>
+        <button name="instagram" onClick={onSocialClick}>Continue with Instagram (not implemented)</button>
       </div>
     </div>
   );
