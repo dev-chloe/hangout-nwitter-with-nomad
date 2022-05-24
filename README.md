@@ -91,4 +91,11 @@ npx create-react-app hangout-nwitter-with-nomad
     # react router
     npm install react-router-dom
     ```
+    ```javascript
+    // v6 
+    <Route path="*" element={<Navigate replace to="/" />} />
+    ```
+    > 버전 6에서는 Redirect가 없애고 Routes안에는 Route만 넣을 것을 권고하고 있다.  
+    > Redirect는 Route 아래 element 속성에 Navigate로 replace속성과 to="url" 속성을 넣어줘서 redirect가 가능하도록 한다.
 
+    - [참조](https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb)
