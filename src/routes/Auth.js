@@ -18,19 +18,17 @@ const Auth = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      let data;
       if (newAccount) {
-        // create accout\
-        data = await createUserWithEmailAndPassword(
+        // create accout
+        await createUserWithEmailAndPassword(
           authService, email, password
         )
       } else {
         // login
-        data = await signInWithEmailAndPassword(
+        await signInWithEmailAndPassword(
           authService, email,password
         )
       }
-      console.log(data);
     } catch (e) {
       setError(e.message);
     }
@@ -46,8 +44,7 @@ const Auth = () => {
     } else if (name === "github") {
       provider = new GithubAuthProvider();
     }
-    const data = await signInWithPopup(authService, provider);
-    console.log(data);
+    await signInWithPopup(authService, provider);
   }
   return (
     <div>
