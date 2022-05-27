@@ -1,7 +1,9 @@
 import Nweet from "components/Nweet";
-import { dbService } from "fBase";
+import { dbService, storageService } from "fBase";
 import { addDoc, collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { ref, uploadString } from "firebase/storage";
 import { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
@@ -20,16 +22,19 @@ const Home = ({ userObj }) => {
   }, [])
   const onSubmit = async (event) => {
     event.preventDefault();
-    try {
-      await addDoc(collection(dbService, "nweets"), {
-        text: nweet,
-        createdAt: Date.now(),
-        creatorId: userObj.uid,
-      })
-    } catch (e) {
-      console.log(e);
-    }
-    setNweet("");
+    const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+    const response = await uploadString(fileRef, attachment, "data_url");
+    console.log(response);
+    // try {
+    //   await addDoc(collection(dbService, "nweets"), {
+    //     text: nweet,
+    //     createdAt: Date.now(),
+    //     creatorId: userObj.uid,
+    //   })
+    // } catch (e) {
+    //   console.log(e);
+    // }
+    // setNweet("");
   }
   const onChange = (event) => {
     const { target: { value } } = event;
@@ -69,7 +74,7 @@ const Home = ({ userObj }) => {
         {
           attachment && 
           <div>
-              <img src={attachment} width="50px" height="50px" />
+              <img src={attachment} width="50px" height="50px" alt="img"/>
               <button onClick={onClearAttachment}>Clear</button>
           </div>
         }
