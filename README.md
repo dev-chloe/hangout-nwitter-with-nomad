@@ -108,3 +108,13 @@ npx create-react-app hangout-nwitter-with-nomad
     > Redirect는 Route 아래 element 속성에 Navigate로 replace속성과 to="url" 속성을 넣어줘서 redirect가 가능하도록 한다.
 
     - [참조](https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb)
+
+4. [**uuid**](https://www.npmjs.com/package/uuid)
+    > 고유 id를 생성해준다.
+
+    ```bash
+    # uuid
+    npm install uuid
+    ```
+
+  

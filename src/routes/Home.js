@@ -1,14 +1,14 @@
 import Nweet from "components/Nweet";
 import { dbService, storageService } from "fBase";
 import { addDoc, collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { ref, uploadString } from "firebase/storage";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
   const fileInput = useRef();
   useEffect(() => {
     const q = query(collection(dbService, "nweets"), orderBy("createdAt", "desc"));
@@ -22,19 +22,20 @@ const Home = ({ userObj }) => {
   }, [])
   const onSubmit = async (event) => {
     event.preventDefault();
-    const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-    const response = await uploadString(fileRef, attachment, "data_url");
-    console.log(response);
-    // try {
-    //   await addDoc(collection(dbService, "nweets"), {
-    //     text: nweet,
-    //     createdAt: Date.now(),
-    //     creatorId: userObj.uid,
-    //   })
-    // } catch (e) {
-    //   console.log(e);
-    // }
-    // setNweet("");
+    let attachmentUrl = "";
+    if (attachment !== "") {
+      const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+      const response = await uploadString(attachmentRef, attachment, "data_url");
+      attachmentUrl = await getDownloadURL(response.ref);
+    }
+    await addDoc(collection(dbService, "nweets"), {
+      text: nweet,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      attachmentUrl
+    })
+    setNweet("");
+    setAttachment("");
   }
   const onChange = (event) => {
     const { target: { value } } = event;
@@ -51,7 +52,7 @@ const Home = ({ userObj }) => {
     reader.readAsDataURL(theFile);
   }
   const onClearAttachment = () => {
-    setAttachment(null);
+    setAttachment("");
     fileInput.current.value = null;
   };
   return (
