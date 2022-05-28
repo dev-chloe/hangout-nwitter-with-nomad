@@ -15,8 +15,8 @@ const Profile = ({ userObj }) => {
         id: doc.id,
         ...doc.data(),
       }))
-      console.log(nweetArray)
-    })
+      console.log(nweetArray)  
+    })  
   }
   const onChange = (event) => {
     const { target: { value } } = event;
