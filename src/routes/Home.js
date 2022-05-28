@@ -36,6 +36,7 @@ const Home = ({ userObj }) => {
     })
     setNweet("");
     setAttachment("");
+    fileInput.current.value = null;
   }
   const onChange = (event) => {
     const { target: { value } } = event;
