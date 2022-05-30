@@ -123,3 +123,23 @@ npx create-react-app hangout-nwitter-with-nomad
     # uuid
     npm install uuid
     ```
+
+5. [**fontawesome**](https://fontawesome.com/v5/docs/web/use-with/react)
+    > 다양한 아이콘을 제공한다.
+
+    ```bash
+    # fontawesome
+    npm install --save @fortawesome/fontawesome-svg-core
+    npm install --save @fortawesome/free-solid-svg-icons
+    npm install --save @fortawesome/react-fontawesome
+    npm install --save @fortawesome/free-brands-svg-icons
+    ```
+
+6. [**gh-pages**](https://www.npmjs.com/package/gh-pages)
+
+    > GitHub 저장소(repository)를 이용해 웹 사이트를 무료로 호스팅해주는 서비스로 GitHub에서 제공한다.
+
+    ```bash
+    # gh-pages
+    npm install gh-pages
+    ```
