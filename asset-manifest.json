@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hangout-nwitter-with-nomad/static/css/main.08dfa63b.css",
+    "main.js": "/hangout-nwitter-with-nomad/static/js/main.0d257338.js",
+    "index.html": "/hangout-nwitter-with-nomad/index.html",
+    "main.08dfa63b.css.map": "/hangout-nwitter-with-nomad/static/css/main.08dfa63b.css.map",
+    "main.0d257338.js.map": "/hangout-nwitter-with-nomad/static/js/main.0d257338.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.08dfa63b.css",
+    "static/js/main.0d257338.js"
+  ]
+}
