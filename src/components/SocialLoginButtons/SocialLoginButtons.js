@@ -2,23 +2,40 @@ import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { authService } from "utils/fBase";
-import "./SocialLoginButtons.css"
+import "./SocialLoginButtons.css";
 
-const Google = "Google", GitHub = "GitHub";
+const Google = "Google";
+const GitHub = "GitHub";
+
 const SocialLoginButtons = () => {
   return (
     <div className="socialLoginBtns">
       <SocialLoginButton vendor={Google} />
       <SocialLoginButton vendor={GitHub} />
+      <SocialLoginButton vendor="Instagram" />
     </div>
   )
 }
 
-const SocialLoginButton = ({ vendor }) => (
-  <button name={vendor} onClick={onSocialClick} className="socialLoginBtn">
-    Continue with {vendor} <SocialIcon vendor={vendor} />
-  </button>
-)
+const SocialLoginButton = ({ vendor }) => {
+  let socialIcon = null;
+  switch (vendor) {
+    case Google:
+      socialIcon = <FontAwesomeIcon icon={faGoogle} />
+      break;
+    case GitHub:
+      socialIcon = <FontAwesomeIcon icon={faGithub} />
+      break;
+    default:
+      console.error(`No SocialIcon implementations: ${vendor}`)
+      return;
+  }
+  return (
+    <button className="socialLoginBtn" name={vendor} onClick={onSocialClick}>
+      Continue with {vendor} {socialIcon}
+    </button>
+  )
+}
 
 const onSocialClick = async (event) => {
   const { target: { name } } = event;
@@ -31,20 +48,9 @@ const onSocialClick = async (event) => {
       provider = new GithubAuthProvider();
       break;
     default:
-      throw new Error(`Not exist AuthProvider ${vender}`)
+      throw new Error(`No AuthProvider implementations: ${vender}`);
   }
   await signInWithPopup(authService, provider);
-}
-
-const SocialIcon = ({ vendor }) => {
-  switch (vendor) {
-    case Google:
-      return <FontAwesomeIcon icon={faGoogle} />;
-    case GitHub:
-      return <FontAwesomeIcon icon={faGithub} />;
-    default:
-      throw new Error(`Not exist SocialIcon ${vendor}`)
-  }
 }
 
 export default SocialLoginButtons;
