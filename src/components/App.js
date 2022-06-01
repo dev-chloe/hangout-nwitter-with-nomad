@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AppRouter from "components/Router";
+import Router from "components/Router";
 import { getAuth, updateProfile } from "firebase/auth";
 import { authService } from "fBase";
 
@@ -48,7 +48,7 @@ function App() {
       }}
     >
       {init ? (
-        <AppRouter
+        <Router
           refreshUser={refreshUser}
           isLoggedIn={isLoggedIn}
           userObj={userObj}
