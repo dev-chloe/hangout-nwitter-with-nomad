@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const Profile = ({ refreshUser, userObj }) => {
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
-  const onLogoutClikc = () => {
+  const onLogoutClick = () => {
     authService.signOut();
     refreshUser();
   }
@@ -54,7 +54,7 @@ const Profile = ({ refreshUser, userObj }) => {
           }}
         />
       </form>
-      <button className="formBtn cancelBtn logOut" onClick={onLogoutClikc}>Logout</button>
+      <button className="formBtn cancelBtn logOut" onClick={onLogoutClick}>Logout</button>
     </div>
   )
 };

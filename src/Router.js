@@ -1,6 +1,6 @@
 import Navigation from "components/Navigation";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
-import Auth from "routes/Auth";
+import Login from "routes/Login";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
 
@@ -16,7 +16,7 @@ const Router = ({ refreshUser, isLoggedIn, userObj }) => {
           </>
           :
           <>
-            <Route path="/" element={<Auth />} />
+            <Route path="/" element={<Login />} />
           </>
         }
         <Route path="*" element={<Navigate replace to="/" />} />
