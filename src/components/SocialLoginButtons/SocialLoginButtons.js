@@ -27,7 +27,7 @@ const SocialLoginButton = ({ vendor }) => {
       socialIcon = <FontAwesomeIcon icon={faGithub} />
       break;
     default:
-      console.error(`No SocialIcon implementations: ${vendor}`)
+      console.warn(`No SocialIcon implementations: ${vendor}`)
       return;
   }
   return (
