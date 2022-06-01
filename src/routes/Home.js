@@ -1,6 +1,6 @@
 import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
-import { dbService } from "fBase";
+import { dbService } from "utils/fBase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 

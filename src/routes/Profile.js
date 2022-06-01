@@ -1,4 +1,4 @@
-import { authService, dbService } from "fBase";
+import { authService, dbService } from "utils/fBase";
 import { updateProfile } from "firebase/auth";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -7,6 +7,7 @@ const Profile = ({ refreshUser, userObj }) => {
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const onLogoutClikc = () => {
     authService.signOut();
+    refreshUser();
   }
   const getMyNweets = async () => {
     const q = query(collection(dbService, "nweets"), where("creatorId", "==", userObj.uid), orderBy("createdAt", "desc"));

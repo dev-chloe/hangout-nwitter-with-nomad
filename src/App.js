@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import Router from "components/Router";
-import { getAuth, updateProfile } from "firebase/auth";
-import { authService } from "fBase";
+import Router from "Router";
+import { updateProfile } from "firebase/auth";
+import { authService } from "utils/fBase";
 
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  useEffect(() => {
-    const auth = getAuth();
-    auth.onAuthStateChanged(function (user) {
+  const refreshUser = () => {
+    authService.onAuthStateChanged((user) => {
       if (user) {
         setisLoggedIn(true);
         setUserObj({
@@ -21,19 +20,14 @@ function App() {
         });
       } else {
         setisLoggedIn(false);
+        setUserObj(null);
       }
       setInit(true);
     })
-  }, [])
-  const refreshUser = () => {
-    setUserObj({
-      displayName: authService.currentUser.displayName,
-      uid: authService.currentUser.uid,
-      updateProfile: () => updateProfile(user, {
-        displayName: authService.currentUser.displayName
-      })
-    });
   }
+  useEffect(() => {
+    refreshUser();
+  }, [])
   return (
     <div
       style={{
@@ -48,11 +42,13 @@ function App() {
       }}
     >
       {init ? (
-        <Router
-          refreshUser={refreshUser}
-          isLoggedIn={isLoggedIn}
-          userObj={userObj}
-        />
+        <>
+          <Router
+            refreshUser={refreshUser}
+            isLoggedIn={isLoggedIn}
+            userObj={userObj}
+          />
+        </>
       ) :
         "Initializing..."
       }
