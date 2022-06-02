@@ -1,10 +1,10 @@
-import Nweet from "components/Nweet";
-import NweetFactory from "components/NweetFactory";
-import { dbService } from "utils/fBase";
+import Nweet from "components/NweetList/Nweet";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { dbService } from "utils/fBase";
+import "./NweetList.css";
 
-const Home = ({ userObj }) => {
+const NweetList = ({ userObj }) => {
   const [nweets, setNweets] = useState([]);
   useEffect(() => {
     const q = query(collection(dbService, "nweets"), orderBy("createdAt", "desc"));
@@ -17,15 +17,12 @@ const Home = ({ userObj }) => {
     })
   }, [])
   return (
-    <div className="container">
-      <NweetFactory userObj={userObj} />
-      <div style={{ marginTop: 30 }}>
-        {nweets.map((nweet) => (
-          <Nweet key={nweet.id} nweetObj={nweet} isOwner={nweet.creatorId === userObj.uid} />
-        ))}
-      </div>
+    <div className="nweet_list">
+      {nweets.map((nweet) => (
+        <Nweet key={nweet.id} nweetObj={nweet} isOwned={nweet.creatorId === userObj.uid} />
+      ))}
     </div>
   )
-};
+}
 
-export default Home;
+export default NweetList;

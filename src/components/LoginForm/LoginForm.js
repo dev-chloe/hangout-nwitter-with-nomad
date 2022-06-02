@@ -20,10 +20,19 @@ const LoginForm = () => {
 
 const Form = ({ isNewAccount = true }) => {
   const [error, setError] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const onChange = (event) => {
+    const { target: { name, value } } = event;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+  }
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      // FIXME
       if (isNewAccount) {
         // create accout
         await createUserWithEmailAndPassword(authService, email, password)
@@ -37,27 +46,21 @@ const Form = ({ isNewAccount = true }) => {
   }
   return (
     <form onSubmit={onSubmit} className="container">
-      <Input type="email" placeholder="Email" />
-      <Input type="password" placeholder="Password" />
+      <Input type="email" placeholder="Email" onChange={onChange} />
+      <Input type="password" placeholder="Password" onChange={onChange} />
       <Submit text={isNewAccount ? "Create Account" : "Login"} />
       {error && <span className="loginError">{error}</span>}
     </form>
   )
 }
 
-const Input = ({ type, placeholder }) => {
-  const [data, setData] = useState("");
-  const onChange = (event) => {
-    const { target: { value } } = event;
-    setData(value);
-  }
+const Input = ({ onChange, type, placeholder }) => {
   return (
     <input
       className="loginInput"
       name={type}
       type={type}
       placeholder={placeholder}
-      value={data}
       onChange={onChange}
       required
     />
