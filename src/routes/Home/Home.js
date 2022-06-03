@@ -5,7 +5,7 @@ const Home = ({ userObj }) => {
   return (
     <div className="container">
       <NweetFactory userObj={userObj} />
-      <NweetList userObj={userObj} />
+      <NweetList creatorId={userObj.uid} />
     </div>
   )
 };

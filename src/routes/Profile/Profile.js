@@ -1,25 +1,13 @@
-import { authService, dbService } from "utils/fBase";
+import { authService } from "utils/fBase";
 import { updateProfile } from "firebase/auth";
-import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import Nweet from "components/NweetList/Nweet/Nweet";
+import { useState } from "react";
+import NweetList from "components/NweetList";
 
 const Profile = ({ refreshUser, userObj }) => {
-  const [nweets, setNweets] = useState([]);
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const onLogoutClick = () => {
     authService.signOut();
     refreshUser();
-  }
-  const getMyNweets = async () => {
-    const q = query(collection(dbService, "nweets"), where("creatorId", "==", userObj.uid), orderBy("createdAt", "desc"));
-    onSnapshot(q, snapshot => {
-      const nweetArray = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      }))
-      setNweets(nweetArray);
-    })
   }
   const onChange = (event) => {
     const { target: { value } } = event;
@@ -34,9 +22,6 @@ const Profile = ({ refreshUser, userObj }) => {
       refreshUser();
     }
   }
-  useEffect(() => {
-    getMyNweets();
-  }, [])
   return (
     <div className="container">
       <form onSubmit={onSubmit} className="profileForm">
@@ -58,9 +43,7 @@ const Profile = ({ refreshUser, userObj }) => {
         />
       </form>
       <button className="formBtn cancelBtn logOut" onClick={onLogoutClick}>Logout</button>
-      {nweets.map((nweet) => (
-        <Nweet key={nweet.id} nweetObj={nweet} isOwner={nweet.creatorId === userObj.uid} />
-      ))}
+      <NweetList canViewOnlyOwned={true} creatorId={userObj.uid} />
     </div>
   )
 };
