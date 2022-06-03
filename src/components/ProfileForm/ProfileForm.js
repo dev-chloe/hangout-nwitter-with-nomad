@@ -1,6 +1,5 @@
-import { updateProfile } from "firebase/auth";
 import { useState } from "react";
-import { authService } from "utils/fBase";
+import AuthService from "services/AuthService";
 
 const ProfileForm = ({ callAfterUpdateProfile, userObj }) => {
   const oldDisplayName = userObj.displayName;
@@ -13,9 +12,7 @@ const ProfileForm = ({ callAfterUpdateProfile, userObj }) => {
     event.preventDefault();
     const isChanged = oldDisplayName !== newDisplayName;
     if (isChanged) {
-      await updateProfile(authService.currentUser, {
-        displayName: newDisplayName
-      })
+      AuthService.saveProfile({ displayName: newDisplayName });
       callAfterUpdateProfile();
     }
   }

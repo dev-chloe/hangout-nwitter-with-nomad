@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -31,10 +31,20 @@ const signOut = async () => {
   auth.signOut();
 }
 
+const changeAuthState = async (callback) => {
+  auth.onAuthStateChanged(callback);
+}
+
+const saveProfile = async (profile) => {
+  updateProfile(auth.currentUser, profile);
+}
+
 const FirebaseRepository = {
   createNewAccount,
   signIn,
   signOut,
+  changeAuthState,
+  saveProfile,
 }
 
 export default FirebaseRepository;

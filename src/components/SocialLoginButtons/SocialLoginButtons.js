@@ -1,7 +1,6 @@
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { authService } from "utils/fBase";
+import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import "./SocialLoginButtons.css";
 
 const Google = "Google";
@@ -50,7 +49,8 @@ const onSocialClick = async (event) => {
     default:
       throw new Error(`No AuthProvider implementations: ${vender}`);
   }
-  await signInWithPopup(authService, provider);
+  const firebaseAuthSystem = getAuth();
+  await signInWithPopup(firebaseAuthSystem, provider);
 }
 
 export default SocialLoginButtons;

@@ -13,10 +13,20 @@ const logout = () => {
   FirebaseRepository.signOut();
 }
 
+const refresh = (callback) => {
+  FirebaseRepository.changeAuthState(callback)
+}
+
+const saveProfile = (profile) => {
+  FirebaseRepository.saveProfile(profile);
+}
+
 const AuthService = {
   signUp,
   login,
-  logout
+  logout,
+  refresh,
+  saveProfile,
 }
 
 export default AuthService;
