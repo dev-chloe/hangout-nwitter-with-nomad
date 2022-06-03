@@ -1,4 +1,4 @@
-.loginInput {
+.login_input {
   max-width: 320px;
   width: 100%;
   padding: 10px;
@@ -9,7 +9,7 @@
   color: black;
 }
 
-.loginSubmit {
+.login_submit {
   text-align: center;
   background: #04aaff;
   color: white;
@@ -17,14 +17,14 @@
   cursor: pointer;
 }
 
-.loginError {
+.login_error {
   color: tomato;
   text-align: center;
   font-weight: 500;
   font-size: 12px;
 }
 
-.loginSwitch {
+.login_switch {
   color: #04aaff;
   cursor: pointer;
   margin-top: 10px;

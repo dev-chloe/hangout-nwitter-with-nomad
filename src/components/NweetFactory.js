@@ -51,19 +51,19 @@ const NweetFactory = ({ userObj }) => {
   };
   return (
     <>
-      <form onSubmit={onSubmit} className="factoryForm">
-        <div className="factoryInput__container">
+      <form onSubmit={onSubmit} className="factory_form">
+        <div className="factory_input_container">
           <input
-            className="factoryInput__input"
+            className="factory_input"
             value={nweet}
             onChange={onChange}
             type="text"
             placeholder="What's on your mind?"
             maxLength={120}
           />
-          <input type="submit" value="&rarr;" className="factoryInput__arrow" />
+          <input type="submit" value="&rarr;" className="factory_input_arrow" />
         </div>
-        <label htmlFor="attach-file" className="factoryInput__label">
+        <label htmlFor="attach-file" className="factory_input_label">
           <span>Add photos</span>
           <FontAwesomeIcon icon={faPlus} />
         </label>
@@ -80,9 +80,9 @@ const NweetFactory = ({ userObj }) => {
         <input type="submit" value="Nweet" style={{ marginBottom: 20 }} />
         {
           attachment &&
-          <div className="factoryForm__attachment" >
+          <div className="factory_form_attachment" >
             <img src={attachment} alt="img" style={{ backgroundImage: attachment, }} />
-            <button className="factoryForm__clear" onClick={onClearAttachment}>
+            <button className="factory_form_clear" onClick={onClearAttachment}>
               <span>Remove</span>
               <FontAwesomeIcon icon={faTimes} />
             </button>

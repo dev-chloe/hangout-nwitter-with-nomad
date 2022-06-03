@@ -34,6 +34,42 @@ form {
   width: 100%;
 }
 
+.mg_top {
+  margin-top: 10px;
+}
+
+.wrapper {
+  max-width: 890px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nweet_icon {
+  color: #04AAFF;
+  font-size: 2em;
+}
+
+.nav_wrap {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.profile {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+
 .nweet-input::placeholder {
   color: white;
   opacity: 0.9;
@@ -48,14 +84,14 @@ form {
 
 /* Nwitter Factory */
 
-.factoryForm {
+.factory_form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
-.factoryInput__container {
+.factory_input_container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,7 +101,7 @@ form {
   width: 100%;
 }
 
-.factoryInput__input {
+.factory_input {
   flex-grow: 1;
   height: 40px;
   padding: 0px 20px;
@@ -76,7 +112,7 @@ form {
   font-size: 12px;
 }
 
-.factoryInput__arrow {
+.factory_input_arrow {
   position: absolute;
   right: 0;
   background-color: #04aaff;
@@ -88,36 +124,36 @@ form {
   color: white;
 }
 
-.factoryInput__label {
+.factory_input_label {
   color: #04aaff;
   cursor: pointer;
 }
 
-.factoryInput__label span {
+.factory_input_label span {
   margin-right: 10px;
   font-size: 12px;
 }
 
-.factoryForm__attachment {
+.factory_form_attachment {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.factoryForm__attachment img {
+.factory_form_attachment img {
   height: 80px;
   width: 80px;
   border-radius: 40px;
 }
 
-.factoryForm__clear {
+.factory_form_clear {
   color: #04aaff;
   cursor: pointer;
   text-align: center;
   margin-top: 10px;
 }
 
-.factoryForm__clear span {
+.factory_form_clear span {
   margin-right: 10px;
   font-size: 12px;
 }

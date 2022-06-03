@@ -1,4 +1,4 @@
-.socialLoginBtns {
+.social_login_btns {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -6,7 +6,7 @@
   gap: 10px;
 }
 
-.socialLoginBtn {
+.social_login_btn {
   cursor: pointer;
   border-radius: 20px;
   border: none;

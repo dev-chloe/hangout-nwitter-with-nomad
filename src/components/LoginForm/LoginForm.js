@@ -10,7 +10,7 @@ const LoginForm = () => {
   return (
     <>
       <Form isNewAccount={isNewAccount} />
-      <span className="loginSwitch" onClick={toggleAccount}>
+      <span className="login_switch" onClick={toggleAccount}>
         {isNewAccount ? "Sign In" : "Create Account"}
       </span>
     </>
@@ -47,7 +47,7 @@ const Form = ({ isNewAccount = true }) => {
       <Input type="email" placeholder="Email" onChange={onChange} />
       <Input type="password" placeholder="Password" onChange={onChange} />
       <Submit text={isNewAccount ? "Create Account" : "Login"} />
-      {error && <span className="loginError">{error}</span>}
+      {error && <span className="login_error">{error}</span>}
     </form>
   )
 }
@@ -55,7 +55,7 @@ const Form = ({ isNewAccount = true }) => {
 const Input = ({ onChange, type, placeholder }) => {
   return (
     <input
-      className="loginInput"
+      className="login_input"
       name={type}
       type={type}
       placeholder={placeholder}
@@ -66,7 +66,7 @@ const Input = ({ onChange, type, placeholder }) => {
 }
 
 const Submit = ({ text }) => (
-  <input className="loginInput loginSubmit" type="submit" value={text} />
+  <input className="login_input login_submit" type="submit" value={text} />
 )
 
 

@@ -8,7 +8,7 @@ const GitHub = "GitHub";
 
 const SocialLoginButtons = () => {
   return (
-    <div className="socialLoginBtns">
+    <div className="social_login_btns">
       <SocialLoginButton vendor={Google} />
       <SocialLoginButton vendor={GitHub} />
       <SocialLoginButton vendor="Instagram" />
@@ -30,7 +30,7 @@ const SocialLoginButton = ({ vendor }) => {
       return;
   }
   return (
-    <button className="socialLoginBtn" name={vendor} onClick={onSocialClick}>
+    <button className="social_login_btn" name={vendor} onClick={onSocialClick}>
       Continue with {vendor} {socialIcon}
     </button>
   )
