@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { authService } from "utils/fBase";
 import { updateProfile } from "firebase/auth";
-import { useState } from "react";
+
+import NweetService from "services/NweetService";
 import NweetList from "components/NweetList";
 
 const Profile = ({ refreshUser, userObj }) => {
@@ -22,6 +24,13 @@ const Profile = ({ refreshUser, userObj }) => {
       refreshUser();
     }
   }
+
+  const [nweetList, setNweetList] = useState([]);
+  const creatorId = userObj.uid;
+  useEffect(() => {
+    NweetService.queryNweetListByCreatorId({ creatorId, setNweetList });
+  }, []);
+
   return (
     <div className="container">
       <form onSubmit={onSubmit} className="profileForm">
@@ -43,7 +52,7 @@ const Profile = ({ refreshUser, userObj }) => {
         />
       </form>
       <button className="formBtn cancelBtn logOut" onClick={onLogoutClick}>Logout</button>
-      <NweetList canViewOnlyOwned={true} creatorId={userObj.uid} />
+      <NweetList nweetList={nweetList} creatorId={creatorId} />
     </div>
   )
 };

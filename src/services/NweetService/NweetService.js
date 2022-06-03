@@ -1,32 +1,36 @@
 import { dbService } from "utils/fBase";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 
-const getAllNweetList = async ({ setNweetList }) => {
-  const q = query(collection(dbService, "nweets"), orderBy("createdAt", "desc"));
-  onSnapshot(q, snapshot => {
-    const nweetList = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    setNweetList(nweetList);
-  })
+const queryNweetList = async ({ setNweetList }) => {
+  const fBaseQuery = query(
+    collection(dbService, "nweets"),
+    orderBy("createdAt", "desc")
+  )
+  executeQuery(fBaseQuery, setNweetList);
 }
 
-const getMyNweetList = async ({ creatorId, setNweetList }) => {
-  const q = query(collection(dbService, "nweets"), where("creatorId", "==", creatorId), orderBy("createdAt", "desc"));
-  onSnapshot(q, snapshot => {
-    const nweetList = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    setNweetList(nweetList);
-  })
+const queryNweetListByCreatorId = async ({ creatorId, setNweetList }) => {
+  const fBaseQuery = query(
+    collection(dbService, "nweets"),
+    where("creatorId", "==", creatorId),
+    orderBy("createdAt", "desc")
+  )
+  executeQuery(fBaseQuery, setNweetList);
 }
 
+const executeQuery = async (fBaseQuery, callBack) => {
+  onSnapshot(
+    fBaseQuery,
+    snapshot => {
+      const nweetList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      callBack(nweetList);
+    }
+  );
+}
 
 const NweetService = {
-  getAllNweetList,
-  getMyNweetList
-}
+  queryNweetList,
+  queryNweetListByCreatorId
+};
 
 export default NweetService;
