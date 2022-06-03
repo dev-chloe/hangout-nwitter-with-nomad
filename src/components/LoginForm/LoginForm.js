@@ -1,6 +1,5 @@
-import { authService } from "utils/fBase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import AuthService from "services/AuthService";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -34,13 +33,12 @@ const Form = ({ isNewAccount = true }) => {
     event.preventDefault();
     try {
       if (isNewAccount) {
-        // create accout
-        await createUserWithEmailAndPassword(authService, email, password)
+        AuthService.signUp({ email, password });
       } else {
-        // login
-        await signInWithEmailAndPassword(authService, email, password)
+        AuthService.login({ email, password })
       }
     } catch (e) {
+      // TODO: Error handling
       setError(e.message);
     }
   }

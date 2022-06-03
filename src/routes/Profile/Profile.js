@@ -1,28 +1,14 @@
 import { useEffect, useState } from "react";
-import { authService } from "utils/fBase";
-import { updateProfile } from "firebase/auth";
-
 import NweetService from "services/NweetService";
 import NweetList from "components/NweetList";
+import ProfileForm from "components/ProfileForm";
+import "./Profile.css";
+import AuthService from "services/AuthService";
 
 const Profile = ({ refreshUser, userObj }) => {
-  const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
-  const onLogoutClick = () => {
-    authService.signOut();
+  const logout = () => {
+    AuthService.logout();
     refreshUser();
-  }
-  const onChange = (event) => {
-    const { target: { value } } = event;
-    setNewDisplayName(value);
-  }
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    if (userObj.displayName !== newDisplayName) {
-      await updateProfile(authService.currentUser, {
-        displayName: newDisplayName
-      })
-      refreshUser();
-    }
   }
 
   const [nweetList, setNweetList] = useState([]);
@@ -33,28 +19,12 @@ const Profile = ({ refreshUser, userObj }) => {
 
   return (
     <div className="container">
-      <form onSubmit={onSubmit} className="profileForm">
-        <input
-          type="text"
-          placeholder="Display Name"
-          autoFocus
-          value={newDisplayName}
-          onChange={onChange}
-          className="formInput"
-        />
-        <input
-          type="submit"
-          value="Update Profile"
-          className="formBtn"
-          style={{
-            marginTop: 10,
-          }}
-        />
-      </form>
-      <button className="formBtn cancelBtn logOut" onClick={onLogoutClick}>Logout</button>
+      <ProfileForm callAfterUpdateProfile={refreshUser} userObj={userObj} />
+      <button className="form_btn cancel_btn logout" onClick={logout}>Logout</button>
       <NweetList nweetList={nweetList} creatorId={creatorId} />
     </div>
   )
 };
+
 
 export default Profile;

@@ -3,7 +3,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-const Navigation = ({ userObj }) => (
+const Navigation = ({ displayName }) => (
   <nav>
     <ul style={{ display: "flex", justifyContent: "center", marginTop: 50, marginBottom: 50 }}>
       <li>
@@ -11,17 +11,16 @@ const Navigation = ({ userObj }) => (
           <FontAwesomeIcon icon={faTwitter} color={"#04AAFF"} size="2x" />
         </Link>
       </li>
-      {userObj &&
+      {displayName &&
         <li>
-          <ProfileLink userObj={userObj} />
+          <ProfileLink displayName={displayName} />
         </li>
       }
     </ul>
   </nav>
 )
 
-const ProfileLink = ({ userObj }) => {
-  const userName = userObj.displayName ?? userObj.email.split("@")[0];
+const ProfileLink = ({ displayName }) => {
   return (
     <Link
       to="/profile"
@@ -35,7 +34,7 @@ const ProfileLink = ({ userObj }) => {
     >
       <FontAwesomeIcon icon={faUser} color={"#04AAFF"} size="2x" />
       <span style={{ marginTop: 10 }}>
-        {userName} Profile
+        {displayName} Profile
       </span>
     </Link>
   )

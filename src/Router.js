@@ -7,7 +7,7 @@ import Profile from "routes/Profile";
 const Router = ({ refreshUser, isLoggedIn, userObj }) => {
   return (
     <HashRouter>
-      <Navigation userObj={userObj} />
+      <Navigation displayName={userObj && userObj.displayName} />
       <Routes>
         {isLoggedIn ?
           <>
