@@ -19,12 +19,28 @@ const auth = getAuth();
 const firestore = getFirestore(app);
 const storage = getStorage();
 
-const createNewAccount = async ({ email, password }) => {
-  await createUserWithEmailAndPassword(auth, email, password);
+const createNewAccount = async ({
+  email,
+  password,
+  callbackOnError = (error) => {
+    console.log("[ERROR] createNewAccount >", error);
+  }
+}) => {
+  // https://firebase.google.com/docs/reference/js/auth.md#createuserwithemailandpassword
+  await createUserWithEmailAndPassword(auth, email, password)
+    .catch(callbackOnError);
 }
 
-const signIn = async ({ email, password }) => {
-  await signInWithEmailAndPassword(auth, email, password);
+const signIn = async ({
+  email,
+  password,
+  callbackOnError = (error) => {
+    console.log("[ERROR] signIn >", error);
+  }
+}) => {
+  // https://firebase.google.com/docs/reference/js/auth.md#signinwithemailandpassword
+  await signInWithEmailAndPassword(auth, email, password)
+    .catch(callbackOnError);
 }
 
 const signOut = async () => {

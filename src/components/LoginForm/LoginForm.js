@@ -31,15 +31,11 @@ const Form = ({ isNewAccount = true }) => {
   }
   const onSubmit = async (event) => {
     event.preventDefault();
-    try {
-      if (isNewAccount) {
-        AuthService.signUp({ email, password });
-      } else {
-        AuthService.login({ email, password })
-      }
-    } catch (e) {
-      // TODO: Error handling
-      setError(e.message);
+    const userInput = { email, password }
+    if (isNewAccount) {
+      AuthService.signUp(userInput, setError);
+    } else {
+      AuthService.login(userInput, setError);
     }
   }
   return (
