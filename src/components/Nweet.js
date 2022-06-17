@@ -41,7 +41,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
             {
               isOwner && (
                 <>
-                  <form onSubmit={onSubmit} className="container nweetEdit">
+                  <form onSubmit={onSubmit} className="container nweet_edit">
                     <input
                       type="text"
                       placeholder="Edit your nweet"
@@ -49,9 +49,9 @@ const Nweet = ({ nweetObj, isOwner }) => {
                       required
                       onChange={onChange}
                     />
-                    <input type="submit" value="Update Nweet" className="formBtn" />
+                    <input type="submit" value="Update Nweet" className="form_btn" />
                   </form>
-                  <button onClick={toggleEditing} className="formBtn cancelBtn">Cancel</button>
+                  <button onClick={toggleEditing} className="form_btn cancel_btn">Cancel</button>
                 </>
               )
             }
@@ -61,7 +61,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
             <h4>{nweetObj.text}</h4>
             {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} alt="img" width="300px" />}
             {isOwner && (
-              <div className="nweet__actions">
+              <div className="nweet_actions">
                 <button onClick={onDeleteClick}>
                   <FontAwesomeIcon icon={faTrash} />
                 </button>

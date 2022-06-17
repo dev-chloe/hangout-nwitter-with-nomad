@@ -34,6 +34,22 @@ form {
   width: 100%;
 }
 
+.mg_top {
+  margin-top: 30px;
+}
+
+.wrapper {
+  max-width: 920px;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 .nweet-input::placeholder {
   color: white;
   opacity: 0.9;
@@ -46,7 +62,33 @@ form {
   flex-direction: column;
 }
 
-.formInput {
+.nav_wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  gap: 10px;
+}
+
+.nav_icon {
+  color: #04AAFF;
+  font-size: 2em;
+}
+
+.nav_icon.logo_icon {
+  margin-bottom: 30px;
+}
+
+.profile_wrap {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  gap: 10px;
+}
+
+.form_input {
   width: 100%;
   padding: 10px 20px;
   border-radius: 20px;
@@ -56,7 +98,7 @@ form {
   color: black;
 }
 
-.formBtn {
+.form_btn {
   cursor: pointer;
   width: 100%;
   padding: 7px 20px;
@@ -67,14 +109,22 @@ form {
   cursor: pointer;
 }
 
-.cancelBtn {
+.not_view {
+  opacity: 0;
+}
+
+.form_btn.last_btn {
+  margin-top: 10px;
+}
+
+.cancel_btn {
   cursor: pointer;
   background-color: tomato;
 }
 
 /* Profile Page */
 
-.profileForm {
+.profile_form {
   border-bottom: 1px solid rgba(255, 255, 255, 0.9);
   padding-bottom: 30px;
   width: 100%;
@@ -82,20 +132,20 @@ form {
   flex-direction: column;
 }
 
-.logOut {
+.logout {
   margin: 50px 0;
 }
 
 /* Nwitter Factory */
 
-.factoryForm {
+.factory_form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
-.factoryInput__container {
+.factory_input_container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,7 +155,7 @@ form {
   width: 100%;
 }
 
-.factoryInput__input {
+.factory_input {
   flex-grow: 1;
   height: 40px;
   padding: 0px 20px;
@@ -116,7 +166,7 @@ form {
   font-size: 12px;
 }
 
-.factoryInput__arrow {
+.factory_arrow {
   position: absolute;
   right: 0;
   background-color: #04aaff;
@@ -128,43 +178,43 @@ form {
   color: white;
 }
 
-.factoryInput__label {
+.factory_label {
   color: #04aaff;
   cursor: pointer;
 }
 
-.factoryInput__label span {
+.factory_label span {
   margin-right: 10px;
   font-size: 12px;
 }
 
-.factoryForm__attachment {
+.factory_attachment {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.factoryForm__attachment img {
+.factory_attachment img {
   height: 80px;
   width: 80px;
   border-radius: 40px;
 }
 
-.factoryForm__clear {
+.factory_form_clear {
   color: #04aaff;
   cursor: pointer;
   text-align: center;
   margin-top: 10px;
 }
 
-.factoryForm__clear span {
+.factory_form_clear span {
   margin-right: 10px;
   font-size: 12px;
 }
 
 /* Nweet */
 
-.nweetEdit .formBtn {
+.nweet_edit .form_btn {
   cursor: pointer;
   margin-top: 15px;
   margin-bottom: 5px;
@@ -197,31 +247,27 @@ form {
   margin-top: 10px;
 }
 
-.nweet__actions {
+.nweet_actions {
   position: absolute;
   right: 10px;
   top: 10px;
 }
 
-.nweet__actions span {
+.nweet_actions span {
   cursor: pointer;
 }
 
-.nweet__actions span:first-child {
+.nweet_actions span:first-child {
   margin-right: 10px;
 }
 
 /* Auth */
 
-.authContainer {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
+.login_wrapper {
   align-items: center;
 }
 
-.authBtns {
+.auth_btns {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -229,7 +275,7 @@ form {
   gap: 10px;
 }
 
-.authBtn {
+.auth_btn {
   cursor: pointer;
   border-radius: 20px;
   border: none;
@@ -243,7 +289,7 @@ form {
 
 /* AuthForm */
 
-.authInput {
+.auth_input {
   max-width: 320px;
   width: 100%;
   padding: 10px;
@@ -254,7 +300,7 @@ form {
   color: black;
 }
 
-.authSubmit {
+.auth_submit {
   text-align: center;
   background: #04aaff;
   color: white;
@@ -262,14 +308,14 @@ form {
   cursor: pointer;
 }
 
-.authError {
+.auth_error {
   color: tomato;
   text-align: center;
   font-weight: 500;
   font-size: 12px;
 }
 
-.authSwitch {
+.auth_switch {
   color: #04aaff;
   cursor: pointer;
   margin-top: 10px;
