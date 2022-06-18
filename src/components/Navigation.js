@@ -3,11 +3,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-const Navigation = ({ userObj }) => {
-  if (userObj.displayName === null) {
-    const userName = userObj.email.split("@")[0];
-    userObj.displayName = userName;
-  }
+const Navigation = ({ displayName }) => {
   return (
     <nav>
       <ul className="nav_wrapper">
@@ -16,14 +12,17 @@ const Navigation = ({ userObj }) => {
             <FontAwesomeIcon icon={faTwitter} className="nav_icon" />
           </Link>
         </li>
-        <li>
-          <Link to="/profile" className="profile_wrap">
-            <FontAwesomeIcon icon={faUser} className="nav_icon" />
-            <span>
-              {userObj.displayName} Profile
-            </span>
-          </Link>
-        </li>
+        {
+          displayName &&
+          <li>
+            <Link to="/profile" className="profile_wrap">
+              <FontAwesomeIcon icon={faUser} className="nav_icon" />
+              <span>
+                {displayName} Profile
+              </span>
+            </Link>
+          </li>
+        }
       </ul>
     </nav>
   )

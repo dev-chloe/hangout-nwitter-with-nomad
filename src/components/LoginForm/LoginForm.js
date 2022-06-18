@@ -2,7 +2,7 @@ import { authService } from "fBase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 
-const AuthForm = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(true);
@@ -46,7 +46,7 @@ const AuthForm = () => {
           required
           value={email}
           onChange={onChange}
-          className="auth_input"
+          className="login_input"
         />
         <input
           name="password"
@@ -55,14 +55,14 @@ const AuthForm = () => {
           required
           value={password}
           onChange={onChange}
-          className="auth_input"
+          className="login_input"
         />
-        <input type="submit" className="auth_input auth_submit" value={newAccount ? "Create Account" : "Login"} />
-        {error && <span className="auth_error">{error}</span>}
+        <input type="submit" className="login_input login_submit" value={newAccount ? "Create Account" : "Login"} />
+        {error && <span className="login_error">{error}</span>}
       </form>
-      <span onClick={toggleAccount} className="auth_switch">{newAccount ? "Sign In" : "Create Account"}</span>
+      <span onClick={toggleAccount} className="login_switch">{newAccount ? "Sign In" : "Create Account"}</span>
     </>
   )
 }
 
-export default AuthForm;
+export default LoginForm;

@@ -13,8 +13,9 @@ function App() {
       if (user) {
         setisLoggedIn(true);
         setUserObj({
-          displayName: user.displayName,
+          displayName: user.displayName ?? user.email.split("@")[0],
           uid: user.uid,
+          email: user.email,
           updateProfile: () => updateProfile(user, {
             displayName: user.displayName
           })
@@ -29,6 +30,7 @@ function App() {
     setUserObj({
       displayName: authService.currentUser.displayName,
       uid: authService.currentUser.uid,
+      email: user.email,
       updateProfile: () => updateProfile(user, {
         displayName: authService.currentUser.displayName
       })
