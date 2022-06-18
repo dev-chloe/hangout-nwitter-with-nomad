@@ -1,5 +1,5 @@
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
-import Login from "routes/Login";
+import Login from "routes/Login/Login";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Navigation from "./Navigation";
