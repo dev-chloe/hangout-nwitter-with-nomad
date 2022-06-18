@@ -1,11 +1,21 @@
 import { authService } from "fBase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import style from "./LoginForm.module.css";
 
 const LoginForm = () => {
+  const [isNewAccount, setIsNewAccount] = useState(true);
+  const toggleForm = () => {
+    setIsNewAccount((prev) => !prev);
+  }
+  return (
+    <Form isNewAccount={isNewAccount} toggleForm={toggleForm} />
+  )
+}
+
+const Form = ({ isNewAccount, toggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newAccount, setNewAccount] = useState(true);
   const [error, setError] = useState("");
   const onChange = (event) => {
     const { target: { name, value } } = event;
@@ -18,7 +28,7 @@ const LoginForm = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (newAccount) {
+      if (isNewAccount) {
         // create accout
         await createUserWithEmailAndPassword(
           authService, email, password
@@ -33,36 +43,31 @@ const LoginForm = () => {
       setError(e.message);
     }
   }
-  const toggleAccount = () => {
-    setNewAccount((prev) => !prev);
-  }
   return (
-    <>
-      <form onSubmit={onSubmit} className="container">
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          value={email}
-          onChange={onChange}
-          className="login_input"
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          value={password}
-          onChange={onChange}
-          className="login_input"
-        />
-        <input type="submit" className="login_input login_submit" value={newAccount ? "Create Account" : "Login"} />
-        {error && <span className="login_error">{error}</span>}
-      </form>
-      <span onClick={toggleAccount} className="login_switch">{newAccount ? "Sign In" : "Create Account"}</span>
-    </>
+    <form onSubmit={onSubmit} className={`container ${style.wrapper}`}>
+      <Input type="email" onChange={onChange} placeholder="Email" />
+      <Input type="password" onChange={onChange} placeholder="Password" />
+      <ToggleBtn type="submit" classNm={`${style.input} ${style.submit}`} text={isNewAccount ? "Create Account" : "Login"} />
+      {error && <span className={style.error}>{error}</span>}
+      <ToggleBtn type="button" classNm={style.switch} toggleForm={toggleForm} text={isNewAccount ? "Sign In" : "Create Account"} />
+    </form>
   )
 }
+
+const Input = ({ type, placeholder, onChange }) => {
+  return (
+    <input
+      className={style.input}
+      name={type}
+      type={type}
+      placeholder={placeholder}
+      onChange={onChange}
+      required
+    />
+  )
+}
+const ToggleBtn = ({ toggleForm, text, classNm, type }) => (
+  <input type={type} className={classNm} value={text} onClick={toggleForm && toggleForm} />
+)
 
 export default LoginForm;
