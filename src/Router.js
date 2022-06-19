@@ -1,8 +1,8 @@
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "routes/Login/Login";
-import Home from "routes/Home";
+import Home from "routes/Home/Home";
 import Profile from "routes/Profile";
-import Navigation from "./Navigation";
+import Navigation from "./components/Navigation";
 
 const Router = ({ refreshUser, isLoggedIn, userObj }) => {
   return (

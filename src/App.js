@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import AppRouter from "components/Router";
+import AppRouter from "Router";
 import { getAuth, updateProfile } from "firebase/auth";
-import { authService } from "fBase";
+import { authService } from "utils/fBase";
 
 function App() {
   const [init, setInit] = useState(false);

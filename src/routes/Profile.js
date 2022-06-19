@@ -1,4 +1,4 @@
-import { authService, dbService } from "fBase";
+import { authService, dbService } from "utils/fBase";
 import { updateProfile } from "firebase/auth";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
