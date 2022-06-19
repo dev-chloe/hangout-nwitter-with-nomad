@@ -12,8 +12,7 @@ const Navigation = ({ displayName }) => {
             <FontAwesomeIcon icon={faTwitter} className="nav_icon" />
           </Link>
         </li>
-        {
-          displayName &&
+        {displayName &&
           <li>
             <Link to="/profile" className="profile_wrap">
               <FontAwesomeIcon icon={faUser} className="nav_icon" />

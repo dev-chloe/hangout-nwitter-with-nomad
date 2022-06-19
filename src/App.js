@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AppRouter from "Router";
-import { getAuth, updateProfile } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import { authService } from "utils/fBase";
 
 function App() {
@@ -8,8 +8,11 @@ function App() {
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
-    const auth = getAuth();
-    auth.onAuthStateChanged(function (user) {
+    refreshUser();
+  }, [])
+  const refreshUser = () => {
+    authService.onAuthStateChanged(function (user) {
+      setInit(true);
       if (user) {
         setisLoggedIn(true);
         setUserObj({
@@ -20,21 +23,11 @@ function App() {
             displayName: user.displayName
           })
         });
-      } else {
-        setisLoggedIn(false);
+        return
       }
-      setInit(true);
+      setisLoggedIn(false);
+      setUserObj(null);
     })
-  }, [])
-  const refreshUser = () => {
-    setUserObj({
-      displayName: authService.currentUser.displayName,
-      uid: authService.currentUser.uid,
-      email: user.email,
-      updateProfile: () => updateProfile(user, {
-        displayName: authService.currentUser.displayName
-      })
-    });
   }
   return (
     <div className="wrapper">
