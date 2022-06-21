@@ -1,4 +1,4 @@
-import NweetFactory from "components/NweetFactory";
+import NweetFactory from "components/NweetFactory/NweetFactory";
 import NweetList from "components/NweetList/NweetList";
 import { useEffect, useState } from "react";
 import NweetService from "services/NweetService/NweetService";
