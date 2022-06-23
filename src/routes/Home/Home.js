@@ -5,13 +5,14 @@ import NweetService from "services/NweetService/NweetService";
 
 const Home = ({ userObj }) => {
   const [nweetList, setNweetList] = useState([]);
+  const creatorId = userObj.uid;
   useEffect(() => {
     NweetService.queryNweetList({ setNweetList });
-  })
+  }, []);
   return (
     <div className="container">
       <NweetFactory userObj={userObj} />
-      <NweetList creatorId={userObj.uid} nweetList={nweetList} />
+      <NweetList nweetList={nweetList} creatorId={creatorId} />
     </div>
   )
 };

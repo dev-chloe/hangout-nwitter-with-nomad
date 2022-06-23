@@ -1,7 +1,7 @@
-import { updateProfile } from "firebase/auth";
 import { useState } from "react";
-import { authService } from "utils/fBase";
 import style from "./ProfileForm.module.css";
+import { updateProfile } from "firebase/auth";
+import { authService } from "utils/fBase";
 
 const ProfileForm = ({ displayName, refreshUser }) => {
   const [newDisplayName, setNewDisplayName] = useState(displayName);

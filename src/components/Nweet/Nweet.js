@@ -7,7 +7,7 @@ import { useState } from "react";
 import style from "./Nweet.module.css";
 
 
-const Nweet = ({ nweetObj, isOwner }) => {
+const Nweet = ({ nweetObj, isOwned }) => {
   const [editing, setEditing] = useState(false);
   const toggleEditing = () => {
     setEditing(prev => !prev);;
@@ -34,7 +34,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
     nweetText,
   }
   const displayModeData = {
-    isOwner,
+    isOwned,
     toggleEditing,
     nweetTextRef,
     nweetText,
@@ -44,7 +44,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
   return (
     <div className={`${style.nweet} ${nweetObj.attachmentUrl && style.mg_b35}`}>
       {
-        editing && isOwner
+        editing && isOwned
           ? <NweeEditMode editProps={editModeData} />
           : <NweetDisplayMode displayProps={displayModeData} />
       }
@@ -72,7 +72,7 @@ const NweeEditMode = ({ editProps }) => {
 }
 
 const NweetDisplayMode = ({ displayProps }) => {
-  const { isOwner, toggleEditing, nweetTextRef, nweetText, nweetImgUrl } = displayProps;
+  const { isOwned, toggleEditing, nweetTextRef, nweetText, nweetImgUrl } = displayProps;
   const onDeleteClick = async () => {
     const ok = window.confirm("Are you sure you want to delete this nweet?");
     if (ok) {
@@ -87,7 +87,7 @@ const NweetDisplayMode = ({ displayProps }) => {
     <>
       <h4>{nweetText}</h4>
       {nweetImgUrl && <img src={nweetImgUrl} alt="img" />}
-      {isOwner &&
+      {isOwned &&
         <div className={style.nweet_actions}>
           <ActionBtn action="delete" clickFn={onDeleteClick} />
           <ActionBtn action="rewrite" clickFn={toggleEditing} />

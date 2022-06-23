@@ -1,9 +1,9 @@
-import { authService } from "utils/fBase";
 import { useEffect, useState } from "react";
 import style from "./Profile.module.css";
 import NweetList from "components/NweetList/NweetList";
 import NweetService from "services/NweetService/NweetService";
 import ProfileForm from "components/ProfileForm/ProfileForm";
+import AuthService from "services/AuthService/AuthService";
 
 const Profile = ({ refreshUser, userObj }) => {
   const [nweetList, setNweetList] = useState([]);
@@ -21,12 +21,12 @@ const Profile = ({ refreshUser, userObj }) => {
 };
 
 const LogoutBtn = ({ refreshUser }) => {
-  const onLogoutClick = () => {
-    authService.signOut();
+  const logout = () => {
+    AuthService.logout();
     refreshUser();
   }
   return (
-    <button className={`form_btn cancel_btn ${style.logout}`} onClick={onLogoutClick}>Logout</button>
+    <button className={`form_btn cancel_btn ${style.logout}`} onClick={logout}>Logout</button>
   )
 }
 
