@@ -13,7 +13,7 @@ const Profile = ({ refreshUser, userObj }) => {
   }, [])
   return (
     <div className="container">
-      <ProfileForm displayName={userObj.displayName} refreshUser={refreshUser} />
+      <ProfileForm userObj={userObj} callAfterUpdateProfile={refreshUser} />
       <LogoutBtn refreshUser={refreshUser} />
       <NweetList creatorId={creatorId} nweetList={nweetList} />
     </div>

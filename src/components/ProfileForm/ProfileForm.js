@@ -1,38 +1,38 @@
 import { useState } from "react";
 import style from "./ProfileForm.module.css";
-import { updateProfile } from "firebase/auth";
-import { authService } from "utils/fBase";
+import AuthService from "services/AuthService/AuthService";
 
-const ProfileForm = ({ displayName, refreshUser }) => {
-  const [newDisplayName, setNewDisplayName] = useState(displayName);
+const ProfileForm = ({ userObj, callAfterUpdateProfile }) => {
+  const oldDisplayName = userObj.displayName;
+  const [newDisplayName, setNewDisplayName] = useState(oldDisplayName);
   const onChange = (event) => {
     const { target: { value } } = event;
     setNewDisplayName(value);
   }
-  const onSubmit = async (event) => {
+  const saveUserInfo = async (event) => {
     event.preventDefault();
-    if (displayName !== newDisplayName) {
-      await updateProfile(authService.currentUser, {
-        displayName: newDisplayName
-      })
-      refreshUser();
+    const isChanged = oldDisplayName !== newDisplayName;
+
+    if (isChanged) {
+      AuthService.saveProfile({ displayName: newDisplayName });
+      callAfterUpdateProfile();
     }
   }
 
   return (
-    <form onSubmit={onSubmit} className={style.form}>
+    <form className={style.form} onSubmit={saveUserInfo}>
       <input
+        className="form_input"
         type="text"
         placeholder="Display Name"
-        autoFocus
         value={newDisplayName}
         onChange={onChange}
-        className="form_input"
+        autoFocus
       />
       <input
+        className="form_btn last_btn"
         type="submit"
         value="Update Profile"
-        className="form_btn last_btn"
       />
     </form>
   )

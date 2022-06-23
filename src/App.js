@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Router from "Router";
-import { updateProfile } from "firebase/auth";
 import AuthService from "services/AuthService/AuthService";
 
 function App() {
@@ -17,7 +16,7 @@ function App() {
           displayName: user.displayName ?? user.email.split("@")[0],
           uid: user.uid,
           email: user.email,
-          updateProfile: () => updateProfile(user, {
+          updateProfile: () => AuthService.saveProfile({
             displayName: user.displayName
           }),
         });

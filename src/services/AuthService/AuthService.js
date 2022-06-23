@@ -17,12 +17,17 @@ const refresh = (callback) => {
   FirebaseRepository.checkAuthState(callback);
 }
 
+const saveProfile = (profile) => {
+  FirebaseRepository.saveProfile(profile);
+}
+
 
 const AuthService = {
   signUp,
   login,
   logout,
   refresh,
+  saveProfile,
 }
 
 export default AuthService;

@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -29,11 +30,16 @@ const signOut = async () => {
 const checkAuthState = async (callback) => {
   auth.onAuthStateChanged(callback);
 }
+
+const saveProfile = async (profile) => {
+  updateProfile(auth.currentUser, profile);
+}
 const FirebaseRepository = {
   createNewAccount,
   signIn,
   signOut,
   checkAuthState,
+  saveProfile,
 }
 
 export default FirebaseRepository;
