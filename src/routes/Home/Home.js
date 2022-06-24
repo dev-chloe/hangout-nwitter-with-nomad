@@ -14,7 +14,6 @@ const Home = ({ userObj }) => {
 
   return (
     <div className="container">
-      {/* <NweetFactory userObj={userObj} /> */}
       <NweetWritter userObj={userObj} />
       <NweetList nweetList={nweetList} creatorId={creatorId} />
     </div>

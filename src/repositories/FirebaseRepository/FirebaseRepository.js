@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid';
 
 // Setup
 const firebaseConfig = {
@@ -16,8 +17,8 @@ const app = initializeApp(firebaseConfig);
 
 // Firebase services
 const auth = getAuth();
-const firestore = getFirestore(app);
 const storage = getStorage();
+const firestore = getFirestore(app);
 
 const createNewAccount = async ({
   email,
@@ -62,12 +63,36 @@ const saveProfile = async (
     .catch((error) => errorCallback(error));
 }
 
+const saveAttachment = async (uid, attachment) => {
+  const attachmentPath = `${uid}/${uuidv4()}`;
+  const attachmentRef = ref(storage, attachmentPath);
+  const response = await uploadString(attachmentRef, attachment, "data_url");
+  return await getDownloadURL(response.ref);
+}
+
+const saveNweet = async (
+  { nweetText, imageDownloadUrl, uid },
+  successCallback = () => console.error("[FIXME] Not implemented! (for then) >"),
+  errorCallback = (error) => console.error("[FIXME] Not implemented! (for catch) >", error)
+) => {
+  await addDoc(collection(firestore, "nweets"), {
+    text: nweetText,
+    createdAt: Date.now(),
+    creatorId: uid,
+    attachmentUrl: imageDownloadUrl,
+  })
+    .then(() => successCallback())
+    .catch((error) => errorCallback(error));
+}
+
 const FirebaseRepository = {
   createNewAccount,
   signIn,
   signOut,
   changeAuthState,
   saveProfile,
+  saveAttachment,
+  saveNweet,
 }
 
 export default FirebaseRepository;
