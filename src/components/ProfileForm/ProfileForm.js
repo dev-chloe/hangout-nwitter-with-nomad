@@ -12,8 +12,7 @@ const ProfileForm = ({ callAfterUpdateProfile, userObj }) => {
     event.preventDefault();
     const isChanged = oldDisplayName !== newDisplayName;
     if (isChanged) {
-      AuthService.saveProfile({ displayName: newDisplayName });
-      callAfterUpdateProfile();
+      AuthService.saveProfile({ displayName: newDisplayName }, callAfterUpdateProfile);
     }
   }
   return (

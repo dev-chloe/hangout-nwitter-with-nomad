@@ -56,8 +56,8 @@ const refresh = (callback) => {
   FirebaseRepository.changeAuthState(callback)
 }
 
-const saveProfile = (profile) => {
-  FirebaseRepository.saveProfile(profile);
+const saveProfile = (profile, successCallback, errorCallback) => {
+  FirebaseRepository.saveProfile(profile, successCallback, errorCallback);
 }
 
 const AuthService = {
