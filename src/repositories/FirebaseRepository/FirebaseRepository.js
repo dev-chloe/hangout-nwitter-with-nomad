@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getFirestore, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -63,6 +63,34 @@ const saveProfile = async (
     .catch((error) => errorCallback(error));
 }
 
+const readNweetList = async (callback, creatorId) => {
+  const firestoreQuery = getNweetListQuery(creatorId);
+  executeQuery(firestoreQuery, callback);
+}
+
+const getNweetListQuery = (creatorId) => {
+  return creatorId
+    ? query(
+      collection(firestore, "nweets"),
+      where("creatorId", "==", creatorId),
+      orderBy("createdAt", "desc")
+    )
+    : query(
+      collection(firestore, "nweets"),
+      orderBy("createdAt", "desc")
+    );
+}
+
+const executeQuery = (firestoreQuery, callback) => {
+  onSnapshot(
+    firestoreQuery,
+    snapshot => {
+      const nweetList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      callback(nweetList);
+    }
+  );
+}
+
 const saveAttachment = async (uid, attachment) => {
   const attachmentPath = `${uid}/${uuidv4()}`;
   const attachmentRef = ref(storage, attachmentPath);
@@ -91,6 +119,7 @@ const FirebaseRepository = {
   signOut,
   changeAuthState,
   saveProfile,
+  readNweetList,
   saveAttachment,
   saveNweet,
 }
