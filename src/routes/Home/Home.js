@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import NweetFactory from "components/NweetFactory";
 import NweetList from "components/NweetList";
 import NweetService from "services/NweetService";
+import NweetWritter from "components/NweetWritter";
 
 const Home = ({ userObj }) => {
   const [nweetList, setNweetList] = useState([]);
@@ -13,7 +14,8 @@ const Home = ({ userObj }) => {
 
   return (
     <div className="container">
-      <NweetFactory userObj={userObj} />
+      {/* <NweetFactory userObj={userObj} /> */}
+      <NweetWritter userObj={userObj} />
       <NweetList nweetList={nweetList} creatorId={creatorId} />
     </div>
   )
