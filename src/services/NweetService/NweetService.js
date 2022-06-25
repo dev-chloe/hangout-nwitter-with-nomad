@@ -1,3 +1,4 @@
+import FirebaseRepository from "components/repositories/FirebaseRepository/FirebaseRepository";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { dbService } from "utils/fBase";
 
@@ -21,9 +22,15 @@ const executeQuery = async (fbBaseQuery, callback) => {
   })
 }
 
+const addNewNweet = async ({ uid, nweetText, nweetImage }, successCallback) => {
+  const imageDownloadUrl = !!nweetImage && await FirebaseRepository.saveAttachment(uid, nweetImage);
+  FirebaseRepository.saveNweet({ uid, nweetText, imageDownloadUrl }, successCallback)
+}
+
 const NweetService = {
   queryNweetList,
-  queryNweetListByCreatorID
+  queryNweetListByCreatorID,
+  addNewNweet
 };
 
 export default NweetService;

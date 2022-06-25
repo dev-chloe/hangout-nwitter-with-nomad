@@ -6,47 +6,37 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import style from "./NweetFactory.module.css";
+import NweetService from "services/NweetService/NweetService";
 
 const NweetFactory = ({ userObj }) => {
-  const [nweet, setNweet] = useState("");
-  const [attachment, setAttachment] = useState("");
+  const [nweetText, setNweetText] = useState("");
+  const [nweetImage, setNweetImage] = useState("");
   const fileInput = useRef();
   const onSubmit = async (event) => {
-    if (nweet === "") {
+    if (nweetText === "") {
       return;
     }
     event.preventDefault();
-    let attachmentUrl = "";
-    if (attachment !== "") {
-      const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-      const response = await uploadString(attachmentRef, attachment, "data_url");
-      attachmentUrl = await getDownloadURL(response.ref);
-    }
-    await addDoc(collection(dbService, "nweets"), {
-      text: nweet,
-      createdAt: Date.now(),
-      creatorId: userObj.uid,
-      attachmentUrl
-    })
-    setNweet("");
-    setAttachment("");
-    fileInput.current.value = null;
-  }
-  const onChange = (event) => {
-    const { target: { value } } = event;
-    setNweet(value);
+    NweetService.addNewNweet(
+      { uid: userObj.uid, nweetText, nweetImage },
+      () => {
+        setNweetText("");
+        setNweetImage("");
+        fileInput.current.value = null;
+      }
+    )
   }
   return (
     <>
       <form onSubmit={onSubmit} className={style.form}>
-        <InputContainer nweet={nweet} onChange={onChange} />
-        <AttachmentBtn fileInput={fileInput} setAttachment={setAttachment} />
+        <InputContainer nweetText={nweetText} setNweetText={setNweetText} />
+        <AttachmentBtn fileInput={fileInput} setNweetImage={setNweetImage} />
         <input type="submit" value="Nweet" />
         {
-          attachment &&
+          nweetImage &&
           <Attachment
-            attachment={attachment}
-            setAttachment={setAttachment}
+            nweetImage={nweetImage}
+            setNweetImage={setNweetImage}
             fileInput={fileInput}
           />
         }
@@ -55,12 +45,16 @@ const NweetFactory = ({ userObj }) => {
   )
 }
 
-const InputContainer = ({ nweet, onChange }) => {
+const InputContainer = ({ nweetText, setNweetText }) => {
+  const onChange = (event) => {
+    const { target: { value } } = event;
+    setNweetText(value);
+  }
   return (
     <div className={style.input_container}>
       <input
         className={style.input}
-        value={nweet}
+        value={nweetText}
         onChange={onChange}
         type="text"
         placeholder="What's on your mind?"
@@ -71,14 +65,14 @@ const InputContainer = ({ nweet, onChange }) => {
   )
 }
 
-const AttachmentBtn = ({ fileInput, setAttachment }) => {
+const AttachmentBtn = ({ fileInput, setNweetImage }) => {
   const onFileChange = (event) => {
     const { target: { files } } = event;
     const theFile = files[0];
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
       const { currentTarget: { result } } = finishedEvent;
-      setAttachment(result);
+      setNweetImage(result);
     }
     reader.readAsDataURL(theFile);
   }
@@ -100,14 +94,14 @@ const AttachmentBtn = ({ fileInput, setAttachment }) => {
   )
 }
 
-const Attachment = ({ attachment, setAttachment, fileInput }) => {
+const Attachment = ({ nweetImage, setNweetImage, fileInput }) => {
   const onClearAttachment = () => {
-    setAttachment("");
+    setNweetImage("");
     fileInput.current.value = null;
   };
   return (
     <div className={style.attachment} >
-      <img src={attachment} alt="img" style={{ backgroundImage: attachment, }} />
+      <img src={nweetImage} alt="img" style={{ backgroundImage: nweetImage, }} />
       <button className={style.form_clear} onClick={onClearAttachment}>
         <span>Remove</span>
         <FontAwesomeIcon icon={faTimes} />
