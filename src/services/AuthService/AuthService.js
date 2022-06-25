@@ -1,5 +1,4 @@
 import FirebaseRepository from "components/repositories/FirebaseRepository/FirebaseRepository";
-import Profile from "routes/Profile/Profile";
 
 const signUp = ({ email, password }) => {
   FirebaseRepository.createNewAccount({ email, password });
@@ -17,8 +16,8 @@ const refresh = (callback) => {
   FirebaseRepository.checkAuthState(callback);
 }
 
-const saveProfile = (profile) => {
-  FirebaseRepository.saveProfile(profile);
+const saveProfile = (profile, successCallback, errorCallack) => {
+  FirebaseRepository.saveProfile(profile, successCallback, errorCallack);
 }
 
 

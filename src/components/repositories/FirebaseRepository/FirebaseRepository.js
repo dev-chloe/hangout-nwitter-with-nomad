@@ -31,8 +31,14 @@ const checkAuthState = async (callback) => {
   auth.onAuthStateChanged(callback);
 }
 
-const saveProfile = async (profile) => {
-  updateProfile(auth.currentUser, profile);
+const saveProfile = async (
+  profile,
+  successCallback = () => console.error("[FIXME] Not implemented! (for then) >"),
+  errorCallack = (error) => console.error("[FIXME] Not implemented! (for catch) >", error)
+) => {
+  updateProfile(auth.currentUser, profile)
+    .then(() => successCallback())
+    .catch((error) => errorCallack(error));
 }
 const FirebaseRepository = {
   createNewAccount,
