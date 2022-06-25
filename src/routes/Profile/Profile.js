@@ -9,7 +9,7 @@ const Profile = ({ refreshUser, userObj }) => {
   const [nweetList, setNweetList] = useState([]);
   const creatorId = userObj.uid;
   useEffect(() => {
-    NweetService.queryNweetListByCreatorID({ creatorId, setNweetList });
+    NweetService.getNweetListByCreatorID({ creatorId, setNweetList });
   }, [])
   return (
     <div className="container">

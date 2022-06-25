@@ -1,59 +1,46 @@
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import style from "./SocialLoginButtons.module.css";
 import AuthService from "services/AuthService/AuthService";
-
-const Google = "google";
-const Github = "github";
+import FirebaseUtil from "utils/FirebaseUtil";
 
 const SocialLoginButtons = () => {
   return (
     <div className={style.btn_wrapper}>
-      <SocialLoginBtn vander={Google} />
-      <SocialLoginBtn vander={Github} />
+      <SocialLoginButton authProviderName={FirebaseUtil.Google} />
+      <SocialLoginButton authProviderName={FirebaseUtil.Github} />
     </div>
   )
 }
 
-const SocialLoginBtn = ({ vander }) => {
+const SocialLoginButton = ({ authProviderName }) => {
   let socialIcon = null;
-  switch (vander) {
-    case Google:
+  switch (authProviderName) {
+    case FirebaseUtil.Google:
       socialIcon = <FontAwesomeIcon icon={faGoogle} />
       break;
-    case Github:
+    case FirebaseUtil.Github:
       socialIcon = <FontAwesomeIcon icon={faGithub} />
       break;
     default:
-      console.warn(`no socialIcon implementations: ${vander}`)
+      console.warn(`no socialIcon implementations: ${authProviderName}`)
       return;
   }
   return (
     <button
-      name={vander}
+      name={authProviderName}
       onClick={onSocialClick}
       className={style.btn}
     >
-      Continue with {vander} {socialIcon}
+      Continue with {authProviderName} {socialIcon}
     </button>
   )
 }
 
 const onSocialClick = async (event) => {
   const { target: { name } } = event;
-  let provider;
-  switch (name) {
-    case Google:
-      provider = new GoogleAuthProvider();
-      break;
-    case Github:
-      provider = new GithubAuthProvider();
-      break;
-    default:
-      throw new Error(`No AuthProvider implementations: ${vender}`);
-  }
-  AuthService.popupLogin(provider);
+  const authProviderName = name;
+  AuthService.popupLogin(authProviderName);
 }
 
 export default SocialLoginButtons;

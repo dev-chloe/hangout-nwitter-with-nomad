@@ -1,10 +1,10 @@
-import FirebaseRepository from "components/repositories/FirebaseRepository/FirebaseRepository";
+import FirebaseRepository from "repositories/FirebaseRepository/FirebaseRepository";
 
-const queryNweetList = async ({ setNweetList }) => {
+const getNweetList = async ({ setNweetList }) => {
   FirebaseRepository.readNweetList(setNweetList)
 }
 
-const queryNweetListByCreatorID = async ({ setNweetList, creatorId }) => {
+const getNweetListByCreatorID = async ({ setNweetList, creatorId }) => {
   FirebaseRepository.readNweetList(setNweetList, creatorId)
 }
 
@@ -13,20 +13,25 @@ const addNewNweet = async ({ uid, nweetText, nweetImage }, successCallback) => {
   FirebaseRepository.saveNweet({ uid, nweetText, imageDownloadUrl }, successCallback)
 }
 
-const nweetRef = (id) => {
-  return FirebaseRepository.nweetRef(id);
+const getNweet = (id) => {
+  return FirebaseRepository.readNweet(id);
 }
 
-const updateNweet = async ({ nweetText, nweetTextRef }, successCallback) => {
-  FirebaseRepository.updateNweet({ nweetText, nweetTextRef }, successCallback)
+const editNweet = async ({ nweetText, nweet }, successCallback) => {
+  FirebaseRepository.updateNweet({ nweetText, nweet }, successCallback)
+}
+
+const removeNweet = async () => {
+
 }
 
 const NweetService = {
-  queryNweetList,
-  queryNweetListByCreatorID,
+  getNweetList,
+  getNweetListByCreatorID,
   addNewNweet,
-  nweetRef,
-  updateNweet,
+  getNweet,
+  editNweet,
+  removeNweet,
 };
 
 export default NweetService;

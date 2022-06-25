@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
-import { addDoc, collection, doc, getFirestore, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getFirestore, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -27,8 +27,8 @@ const signIn = async ({ email, password }) => {
   await signInWithEmailAndPassword(auth, email, password);
 }
 
-const popupLogin = async (provider) => {
-  await signInWithPopup(auth, provider);
+const signInWithAuthProvider = async (authProvider) => {
+  await signInWithPopup(auth, authProvider);
 }
 
 const signOut = async () => {
@@ -92,35 +92,39 @@ const saveNweet = async (
     .catch((error) => errorCallack(error));
 }
 
-const nweetRef = ({ id }) => {
+const readNweet = ({ id }) => {
   return doc(firestore, "nweets", id);
 }
 
 const updateNweet = async (
-  { nweetText, nweetTextRef },
+  { nweetText, nweet },
   successCallback = () => console.error("[FIXME] Not implemented! (for then) >"),
   errorCallack = (error) => console.error("[FIXME] Not implemented! (for catch) >", error)
 ) => {
-  await updateDoc(nweetTextRef, {
+  await updateDoc(nweet, {
     text: nweetText,
   })
     .then(() => successCallback())
     .catch((error) => errorCallack(error));
 }
 
+const deleteNweet = () => {
+  // await deleteDoc();
+}
 
 const FirebaseRepository = {
   createNewAccount,
   signIn,
-  popupLogin,
+  signInWithAuthProvider,
   signOut,
   checkAuthState,
   saveProfile,
   readNweetList,
   saveAttachment,
   saveNweet,
-  nweetRef,
+  readNweet,
   updateNweet,
+  deleteNweet,
 }
 
 export default FirebaseRepository;

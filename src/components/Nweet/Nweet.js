@@ -1,12 +1,11 @@
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { dbService, storageService } from "utils/fBase";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { storageService } from "utils/fBase";
+import { deleteDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { useState } from "react";
 import style from "./Nweet.module.css";
 import NweetService from "services/NweetService/NweetService";
-
 
 const Nweet = ({ nweetObj, isOwned }) => {
   const [editing, setEditing] = useState(false);
@@ -15,37 +14,26 @@ const Nweet = ({ nweetObj, isOwned }) => {
   }
 
   const [nweetText, setNweetText] = useState(nweetObj.text);
-  // const nweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`);
-  const nweetTextRef = NweetService.nweetRef({ id: nweetObj.id });
-  console.log(nweetTextRef)
-  const onSubmit = async (event) => {
+  const nweet = NweetService.getNweet({ id: nweetObj.id });
+  const submitEdittedNweet = async (event) => {
     event.preventDefault();
-    // await updateDoc(nweetTextRef, {
-    //   text: nweetText,
-    // });
-    // setEditing(false);
-    NweetService.updateNweet(
-      { nweetText, nweetTextRef },
-      () => {
-        setEditing(false);
-      }
-    )
+    NweetService.editNweet({ nweetText, nweet }, () => setEditing(false));
   }
-  const onChange = (event) => {
+  const typeToEditNweet = (event) => {
     const { target: { value } } = event;
     setNweetText(value);
   }
 
   const editModeData = {
     toggleEditing,
-    onChange,
-    onSubmit,
+    typeToEditNweet,
+    submitEdittedNweet,
     nweetText,
   }
   const displayModeData = {
     isOwned,
     toggleEditing,
-    nweetTextRef,
+    nweet,
     nweetText,
     nweetImgUrl: nweetObj.attachmentUrl
   }
@@ -62,15 +50,15 @@ const Nweet = ({ nweetObj, isOwned }) => {
 }
 
 const NweeEditMode = ({ editProps }) => {
-  const { toggleEditing, onChange, onSubmit, nweetText } = editProps;
+  const { toggleEditing, typeToEditNweet, submitEdittedNweet, nweetText } = editProps;
   return (
     <>
-      <form onSubmit={onSubmit} className={`container ${style.nweet_edit}`}>
+      <form onSubmit={submitEdittedNweet} className={`container ${style.nweet_edit}`}>
         <input
           type="text"
           placeholder="Edit your nweet"
           value={nweetText}
-          onChange={onChange}
+          onChange={typeToEditNweet}
           required
         />
         <input type="submit" value="Update Nweet" className="form_btn" />
@@ -81,12 +69,12 @@ const NweeEditMode = ({ editProps }) => {
 }
 
 const NweetDisplayMode = ({ displayProps }) => {
-  const { isOwned, toggleEditing, nweetTextRef, nweetText, nweetImgUrl } = displayProps;
+  const { isOwned, toggleEditing, nweet, nweetText, nweetImgUrl } = displayProps;
   const onDeleteClick = async () => {
     const ok = window.confirm("Are you sure you want to delete this nweet?");
     if (ok) {
       // delete nweet
-      await deleteDoc(nweetTextRef);
+      await deleteDoc(nweet);
       if (nweetImgUrl) {
         await deleteObject(ref(storageService, nweetImgUrl));
       }

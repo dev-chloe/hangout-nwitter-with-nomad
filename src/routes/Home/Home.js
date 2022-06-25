@@ -7,7 +7,7 @@ const Home = ({ userObj }) => {
   const [nweetList, setNweetList] = useState([]);
   const creatorId = userObj.uid;
   useEffect(() => {
-    NweetService.queryNweetList({ setNweetList });
+    NweetService.getNweetList({ setNweetList });
   }, []);
   return (
     <div className="container">
