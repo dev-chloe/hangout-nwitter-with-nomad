@@ -1,10 +1,6 @@
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { dbService, storageService } from "utils/fBase";
-import { addDoc, collection } from "firebase/firestore";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useRef, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
 import style from "./NweetFactory.module.css";
 import NweetService from "services/NweetService/NweetService";
 

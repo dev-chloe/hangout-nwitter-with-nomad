@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { authService } from "utils/fBase";
 import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import style from "./SocialLoginButtons.module.css";
+import AuthService from "services/AuthService/AuthService";
 
 const Google = "google";
 const Github = "github";
@@ -53,7 +54,7 @@ const onSocialClick = async (event) => {
     default:
       throw new Error(`No AuthProvider implementations: ${vender}`);
   }
-  await signInWithPopup(authService, provider);
+  AuthService.popupLogin(provider);
 }
 
 export default SocialLoginButtons;

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { addDoc, collection, getFirestore, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
@@ -25,6 +25,10 @@ const createNewAccount = async ({ email, password }) => {
 
 const signIn = async ({ email, password }) => {
   await signInWithEmailAndPassword(auth, email, password);
+}
+
+const popupLogin = async (provider) => {
+  await signInWithPopup(auth, provider);
 }
 
 const signOut = async () => {
@@ -91,6 +95,7 @@ const saveNweet = async (
 const FirebaseRepository = {
   createNewAccount,
   signIn,
+  popupLogin,
   signOut,
   checkAuthState,
   saveProfile,

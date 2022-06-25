@@ -1,6 +1,4 @@
 import FirebaseRepository from "components/repositories/FirebaseRepository/FirebaseRepository";
-import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { dbService } from "utils/fBase";
 
 const queryNweetList = async ({ setNweetList }) => {
   FirebaseRepository.readNweetList(setNweetList)

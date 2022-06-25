@@ -1,5 +1,3 @@
-import { authService } from "utils/fBase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import style from "./LoginForm.module.css";
 import AuthService from "services/AuthService/AuthService";

@@ -8,6 +8,10 @@ const login = ({ email, password }) => {
   FirebaseRepository.signIn({ email, password });
 }
 
+const popupLogin = (provider) => {
+  FirebaseRepository.popupLogin(provider)
+}
+
 const logout = () => {
   FirebaseRepository.signOut();
 }
@@ -24,6 +28,7 @@ const saveProfile = (profile, successCallback, errorCallack) => {
 const AuthService = {
   signUp,
   login,
+  popupLogin,
   logout,
   refresh,
   saveProfile,
