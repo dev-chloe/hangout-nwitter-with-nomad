@@ -3,23 +3,11 @@ import { collection, onSnapshot, orderBy, query, where } from "firebase/firestor
 import { dbService } from "utils/fBase";
 
 const queryNweetList = async ({ setNweetList }) => {
-  const fbBaseQuery = query(collection(dbService, "nweets"), orderBy("createdAt", "desc"));
-  executeQuery(fbBaseQuery, setNweetList)
+  FirebaseRepository.readNweetList(setNweetList)
 }
 
-const queryNweetListByCreatorID = async ({ creatorId, setNweetList }) => {
-  const fbBaseQuery = query(collection(dbService, "nweets"), where("creatorId", "==", creatorId), orderBy("createdAt", "desc"));
-  executeQuery(fbBaseQuery, setNweetList)
-}
-
-const executeQuery = async (fbBaseQuery, callback) => {
-  onSnapshot(fbBaseQuery, snapshot => {
-    const nweetList = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }))
-    callback(nweetList);
-  })
+const queryNweetListByCreatorID = async ({ setNweetList, creatorId }) => {
+  FirebaseRepository.readNweetList(setNweetList, creatorId)
 }
 
 const addNewNweet = async ({ uid, nweetText, nweetImage }, successCallback) => {
@@ -30,7 +18,7 @@ const addNewNweet = async ({ uid, nweetText, nweetImage }, successCallback) => {
 const NweetService = {
   queryNweetList,
   queryNweetListByCreatorID,
-  addNewNweet
+  addNewNweet,
 };
 
 export default NweetService;
