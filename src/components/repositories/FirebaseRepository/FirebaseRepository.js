@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
-import { addDoc, collection, getFirestore, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getFirestore, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -92,6 +92,23 @@ const saveNweet = async (
     .catch((error) => errorCallack(error));
 }
 
+const nweetRef = ({ id }) => {
+  return doc(firestore, "nweets", id);
+}
+
+const updateNweet = async (
+  { nweetText, nweetTextRef },
+  successCallback = () => console.error("[FIXME] Not implemented! (for then) >"),
+  errorCallack = (error) => console.error("[FIXME] Not implemented! (for catch) >", error)
+) => {
+  await updateDoc(nweetTextRef, {
+    text: nweetText,
+  })
+    .then(() => successCallback())
+    .catch((error) => errorCallack(error));
+}
+
+
 const FirebaseRepository = {
   createNewAccount,
   signIn,
@@ -102,6 +119,8 @@ const FirebaseRepository = {
   readNweetList,
   saveAttachment,
   saveNweet,
+  nweetRef,
+  updateNweet,
 }
 
 export default FirebaseRepository;

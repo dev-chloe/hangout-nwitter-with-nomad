@@ -5,6 +5,7 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { useState } from "react";
 import style from "./Nweet.module.css";
+import NweetService from "services/NweetService/NweetService";
 
 
 const Nweet = ({ nweetObj, isOwned }) => {
@@ -14,13 +15,21 @@ const Nweet = ({ nweetObj, isOwned }) => {
   }
 
   const [nweetText, setNweetText] = useState(nweetObj.text);
-  const nweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`);
+  // const nweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`);
+  const nweetTextRef = NweetService.nweetRef({ id: nweetObj.id });
+  console.log(nweetTextRef)
   const onSubmit = async (event) => {
     event.preventDefault();
-    await updateDoc(nweetTextRef, {
-      text: nweetText,
-    });
-    setEditing(false);
+    // await updateDoc(nweetTextRef, {
+    //   text: nweetText,
+    // });
+    // setEditing(false);
+    NweetService.updateNweet(
+      { nweetText, nweetTextRef },
+      () => {
+        setEditing(false);
+      }
+    )
   }
   const onChange = (event) => {
     const { target: { value } } = event;

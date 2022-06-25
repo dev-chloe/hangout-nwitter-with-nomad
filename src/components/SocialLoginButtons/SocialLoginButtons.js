@@ -1,7 +1,6 @@
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { authService } from "utils/fBase";
-import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import style from "./SocialLoginButtons.module.css";
 import AuthService from "services/AuthService/AuthService";
 

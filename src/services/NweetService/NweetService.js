@@ -13,10 +13,20 @@ const addNewNweet = async ({ uid, nweetText, nweetImage }, successCallback) => {
   FirebaseRepository.saveNweet({ uid, nweetText, imageDownloadUrl }, successCallback)
 }
 
+const nweetRef = (id) => {
+  return FirebaseRepository.nweetRef(id);
+}
+
+const updateNweet = async ({ nweetText, nweetTextRef }, successCallback) => {
+  FirebaseRepository.updateNweet({ nweetText, nweetTextRef }, successCallback)
+}
+
 const NweetService = {
   queryNweetList,
   queryNweetListByCreatorID,
   addNewNweet,
+  nweetRef,
+  updateNweet,
 };
 
 export default NweetService;
