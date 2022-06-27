@@ -26,23 +26,23 @@ function App() {
       setUserObj(null);
     });
   }
-
   useEffect(() => {
     refreshUser();
   }, [])
-
   return (
     <div className="wrapper">
-      {init ?
-        <Router
-          refreshUser={refreshUser}
-          isLoggedIn={isLoggedIn}
-          userObj={userObj}
-        />
-        :
-        "Initializing..."
-      }
-      <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
+      <div className="contents_wrapper">
+        {init ?
+          <Router
+            refreshUser={refreshUser}
+            isLoggedIn={isLoggedIn}
+            userObj={userObj}
+          />
+          :
+          "Initializing..."
+        }
+        <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
+      </div>
     </div>
   );
 }

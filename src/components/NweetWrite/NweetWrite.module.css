@@ -17,24 +17,24 @@
 
 .input {
   flex-grow: 1;
-  height: 40px;
+  height: 45px;
   padding: 0px 20px;
   color: white;
   border: 1px solid #04aaff;
-  border-radius: 20px;
+  border-radius: 25px;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .arrow {
   position: absolute;
   right: 0;
   background-color: #04aaff;
-  height: 40px;
-  width: 40px;
+  height: 45px;
+  width: 45px;
   padding: 10px 0px;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 25px;
   color: white;
 }
 
@@ -45,7 +45,7 @@
 
 .label span {
   margin-right: 10px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .attachment {
@@ -70,7 +70,7 @@
 
 .form_clear span {
   margin-right: 10px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .not_view {

@@ -36,7 +36,7 @@ const Nweet = ({ nweetObj, isOwned }) => {
   }
 
   return (
-    <div className={`${style.nweet} ${nweetObj.attachmentUrl && style.mg_b35}`}>
+    <div className={style.nweet}>
       {
         editing && isOwned
           ? <NweeEditMode editProps={editModeData} />

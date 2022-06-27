@@ -13,7 +13,7 @@ const Home = ({ userObj }) => {
     <div className="container">
       <NweetWrite userObj={userObj} />
       <NweetList nweetList={nweetList} creatorId={creatorId} />
-    </div>
+    </div >
   )
 };
 

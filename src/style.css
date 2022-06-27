@@ -8,13 +8,18 @@ input {
   all: unset;
   box-sizing: border-box;
   appearance: none;
+  font-size: 16px;
+}
+
+input::placeholder {
+  color: #e7e7e7;
 }
 
 body {
   background-color: black;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: white;
 }
 
@@ -23,6 +28,7 @@ button {
   color: black;
   border: none;
   cursor: pointer;
+  font-size: 16px;
 }
 
 a {
@@ -35,15 +41,22 @@ form {
 }
 
 .wrapper {
-  max-width: 920px;
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  padding: 20px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.contents_wrapper {
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 footer {
@@ -57,7 +70,7 @@ footer {
 
 .container {
   width: 100%;
-  max-width: 320px;
+  max-width: 420px;
   display: flex;
   flex-direction: column;
 }
@@ -75,7 +88,7 @@ footer {
 .form_btn {
   cursor: pointer;
   width: 100%;
-  padding: 7px 20px;
+  padding: 11px 20px;
   text-align: center;
   color: white;
   border-radius: 20px;
