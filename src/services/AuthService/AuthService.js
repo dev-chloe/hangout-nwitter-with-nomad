@@ -26,7 +26,6 @@ const saveProfile = (profile, successCallback, errorCallack) => {
   FirebaseRepository.saveProfile(profile, successCallback, errorCallack);
 }
 
-
 const AuthService = {
   signUp,
   login,

@@ -1,11 +1,8 @@
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { storageService } from "utils/fBase";
-import { deleteDoc } from "firebase/firestore";
-import { deleteObject, ref } from "firebase/storage";
 import { useState } from "react";
-import style from "./Nweet.module.css";
 import NweetService from "services/NweetService/NweetService";
+import style from "./Nweet.module.css";
 
 const Nweet = ({ nweetObj, isOwned }) => {
   const [editing, setEditing] = useState(false);
@@ -71,13 +68,9 @@ const NweeEditMode = ({ editProps }) => {
 const NweetDisplayMode = ({ displayProps }) => {
   const { isOwned, toggleEditing, nweet, nweetText, nweetImgUrl } = displayProps;
   const onDeleteClick = async () => {
-    const ok = window.confirm("Are you sure you want to delete this nweet?");
-    if (ok) {
-      // delete nweet
-      await deleteDoc(nweet);
-      if (nweetImgUrl) {
-        await deleteObject(ref(storageService, nweetImgUrl));
-      }
+    const confirmedRemoveNweet = window.confirm("Are you sure you want to delete this nweet?");
+    if (confirmedRemoveNweet) {
+      NweetService.removeNweet(nweet, nweetImgUrl);
     }
   }
   return (

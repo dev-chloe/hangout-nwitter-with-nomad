@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { addDoc, collection, deleteDoc, doc, getFirestore, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 
 const firebaseConfig = {
@@ -55,10 +55,9 @@ const readNweetList = async (callback, creatorId) => {
 }
 
 const getNweetListQuery = (creatorId) => {
-  return creatorId ?
-    query(collection(firestore, "nweets"), where("creatorId", "==", creatorId), orderBy("createdAt", "desc"))
-    :
-    query(collection(firestore, "nweets"), orderBy("createdAt", "desc"))
+  return creatorId
+    ? query(collection(firestore, "nweets"), where("creatorId", "==", creatorId), orderBy("createdAt", "desc"))
+    : query(collection(firestore, "nweets"), orderBy("createdAt", "desc"))
 }
 
 const executeQuery = async (firestoreQuery, callback) => {
@@ -108,8 +107,12 @@ const updateNweet = async (
     .catch((error) => errorCallack(error));
 }
 
-const deleteNweet = () => {
-  // await deleteDoc();
+const deleteNweet = async (nweet) => {
+  await deleteDoc(nweet);
+}
+
+const deletNweetImage = async (nweetImageUrl) => {
+  return await deleteObject(ref(storage, nweetImageUrl));
 }
 
 const FirebaseRepository = {
@@ -125,6 +128,7 @@ const FirebaseRepository = {
   readNweet,
   updateNweet,
   deleteNweet,
+  deletNweetImage
 }
 
 export default FirebaseRepository;

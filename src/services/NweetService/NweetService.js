@@ -21,8 +21,9 @@ const editNweet = async ({ nweetText, nweet }, successCallback) => {
   FirebaseRepository.updateNweet({ nweetText, nweet }, successCallback)
 }
 
-const removeNweet = async () => {
-
+const removeNweet = async (nweet, nweetImageUrl) => {
+  !!nweetImageUrl && await FirebaseRepository.deletNweetImage(nweetImageUrl);
+  FirebaseRepository.deleteNweet(nweet);
 }
 
 const NweetService = {
