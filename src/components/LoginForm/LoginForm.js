@@ -56,6 +56,7 @@ const Input = ({ type, placeholder, onChange }) => {
     />
   )
 }
+
 const ToggleBtn = ({ toggleForm, text, classNm, type }) => (
   <input type={type} className={classNm} value={text} onClick={toggleForm && toggleForm} />
 )

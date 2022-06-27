@@ -1,8 +1,8 @@
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import NweetService from "services/NweetService/NweetService";
 import style from "./Nweet.module.css";
+import NweetService from "services/NweetService/NweetService";
 
 const Nweet = ({ nweetObj, isOwned }) => {
   const [editing, setEditing] = useState(false);

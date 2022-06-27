@@ -1,7 +1,7 @@
-import NweetWrite from "components/NweetWrite/NweetWrite";
-import NweetList from "components/NweetList/NweetList";
 import { useEffect, useState } from "react";
 import NweetService from "services/NweetService/NweetService";
+import NweetWrite from "components/NweetWrite/NweetWrite";
+import NweetList from "components/NweetList/NweetList";
 
 const Home = ({ userObj }) => {
   const [nweetList, setNweetList] = useState([]);

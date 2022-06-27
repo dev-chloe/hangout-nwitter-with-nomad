@@ -1,8 +1,8 @@
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./SocialLoginButtons.module.css";
-import AuthService from "services/AuthService/AuthService";
 import FirebaseUtil from "utils/FirebaseUtil";
+import AuthService from "services/AuthService/AuthService";
 
 const SocialLoginButtons = () => {
   return (
@@ -16,7 +16,7 @@ const SocialLoginButtons = () => {
 
 const SocialLoginButton = ({ authProviderName }) => {
   const socialIcon = getSocialIcon({ authProviderName });
-  const onSocialClick = async (event) => {
+  const socialLoginClick = async (event) => {
     const { target: { name } } = event;
     const authProviderName = name;
     AuthService.popupLogin(authProviderName);
@@ -25,7 +25,7 @@ const SocialLoginButton = ({ authProviderName }) => {
     <button
       className={style.btn}
       name={authProviderName}
-      onClick={onSocialClick}
+      onClick={socialLoginClick}
     >
       Continue with {authProviderName} {socialIcon}
     </button>

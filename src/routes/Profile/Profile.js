@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import style from "./Profile.module.css";
-import NweetList from "components/NweetList/NweetList";
 import NweetService from "services/NweetService/NweetService";
 import ProfileForm from "components/ProfileForm/ProfileForm";
+import NweetList from "components/NweetList/NweetList";
 import AuthService from "services/AuthService/AuthService";
 
 const Profile = ({ refreshUser, userObj }) => {

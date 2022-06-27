@@ -8,7 +8,7 @@ const NweetWrite = ({ userObj }) => {
   const [nweetText, setNweetText] = useState("");
   const [nweetImage, setNweetImage] = useState("");
   const fileInput = useRef();
-  const onSubmit = async (event) => {
+  const updateNewNweet = async (event) => {
     if (nweetText === "") {
       return;
     }
@@ -24,7 +24,7 @@ const NweetWrite = ({ userObj }) => {
   }
   return (
     <>
-      <form onSubmit={onSubmit} className={style.form}>
+      <form onSubmit={updateNewNweet} className={style.form}>
         <InputContainer nweetText={nweetText} setNweetText={setNweetText} />
         <AttachmentBtn fileInput={fileInput} setNweetImage={setNweetImage} />
         <input type="submit" value="Nweet" />
