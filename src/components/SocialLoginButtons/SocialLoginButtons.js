@@ -9,38 +9,39 @@ const SocialLoginButtons = () => {
     <div className={style.btn_wrapper}>
       <SocialLoginButton authProviderName={FirebaseUtil.Google} />
       <SocialLoginButton authProviderName={FirebaseUtil.Github} />
+      <SocialLoginButton authProviderName={FirebaseUtil.Instagram} />
     </div>
   )
 }
 
 const SocialLoginButton = ({ authProviderName }) => {
-  let socialIcon = null;
-  switch (authProviderName) {
-    case FirebaseUtil.Google:
-      socialIcon = <FontAwesomeIcon icon={faGoogle} />
-      break;
-    case FirebaseUtil.Github:
-      socialIcon = <FontAwesomeIcon icon={faGithub} />
-      break;
-    default:
-      console.warn(`no socialIcon implementations: ${authProviderName}`)
-      return;
+  const socialIcon = getSocialIcon({ authProviderName });
+  const onSocialClick = async (event) => {
+    const { target: { name } } = event;
+    const authProviderName = name;
+    AuthService.popupLogin(authProviderName);
   }
-  return (
+  return (socialIcon) && (
     <button
+      className={style.btn}
       name={authProviderName}
       onClick={onSocialClick}
-      className={style.btn}
     >
       Continue with {authProviderName} {socialIcon}
     </button>
   )
 }
 
-const onSocialClick = async (event) => {
-  const { target: { name } } = event;
-  const authProviderName = name;
-  AuthService.popupLogin(authProviderName);
+const getSocialIcon = ({ authProviderName }) => {
+  switch (authProviderName) {
+    case FirebaseUtil.Google:
+      return <FontAwesomeIcon icon={faGoogle} />;
+    case FirebaseUtil.Github:
+      return <FontAwesomeIcon icon={faGithub} />;
+    default:
+      console.warn(`no socialIcon implementations: ${authProviderName}`)
+      return null;
+  }
 }
 
 export default SocialLoginButtons;

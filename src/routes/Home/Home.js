@@ -1,4 +1,4 @@
-import NweetFactory from "components/NweetFactory/NweetFactory";
+import NweetWrite from "components/NweetWrite/NweetWrite";
 import NweetList from "components/NweetList/NweetList";
 import { useEffect, useState } from "react";
 import NweetService from "services/NweetService/NweetService";
@@ -11,7 +11,7 @@ const Home = ({ userObj }) => {
   }, []);
   return (
     <div className="container">
-      <NweetFactory userObj={userObj} />
+      <NweetWrite userObj={userObj} />
       <NweetList nweetList={nweetList} creatorId={creatorId} />
     </div>
   )

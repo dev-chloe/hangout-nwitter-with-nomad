@@ -36,6 +36,7 @@ const Form = ({ isNewAccount, toggleForm }) => {
       setError(e.message);
     }
   }
+
   return (
     <form onSubmit={onSubmit} className={`container ${style.wrapper}`}>
       <Input type="email" onChange={onChange} placeholder="Email" />
