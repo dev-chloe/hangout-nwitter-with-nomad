@@ -19,12 +19,25 @@ const auth = getAuth();
 const storage = getStorage();
 const firestore = getFirestore();
 
-const createNewAccount = async ({ email, password }) => {
-  await createUserWithEmailAndPassword(auth, email, password);
+const createNewAccount = async ({
+  email,
+  password,
+  callbackError = (error) => {
+    console.log(("[ERROR] createNewAccount >", error))
+  }
+}) => {
+  await createUserWithEmailAndPassword(auth, email, password)
+    .catch(callbackError);
 }
 
-const signIn = async ({ email, password }) => {
-  await signInWithEmailAndPassword(auth, email, password);
+const signIn = async ({
+  email,
+  password,
+  callbackError = (error) => {
+    console.log(("[ERROR] signIn >", error))
+  }
+}) => {
+  await signInWithEmailAndPassword(auth, email, password).catch(callbackError);
 }
 
 const signInWithAuthProvider = async (authProvider) => {

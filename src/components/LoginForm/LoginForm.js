@@ -26,14 +26,10 @@ const Form = ({ isNewAccount, toggleForm }) => {
   }
   const onSubmit = async (event) => {
     event.preventDefault();
-    try {
-      if (isNewAccount) {
-        AuthService.signUp({ email, password });
-      } else {
-        AuthService.login({ email, password });
-      }
-    } catch (e) {
-      setError(e.message);
+    if (isNewAccount) {
+      AuthService.signUp({ email, password }, setError);
+    } else {
+      AuthService.login({ email, password }, setError);
     }
   }
 
