@@ -163,3 +163,26 @@ npx create-react-app hangout-nwitter-with-nomad
     # gh-pages
     npm install gh-pages
     ```
+
+7. [**eslint**](https://eslint.org/docs/latest/)
+
+    ```bash
+    eslint --init
+
+    You can also run this command directly using 'npm init @eslint/config'.
+    ✔ How would you like to use ESLint? · problems
+    ✔ What type of modules does your project use? · esm
+    ✔ Which framework does your project use? · react
+    ✔ Does your project use TypeScript? · No / Yes
+    ✔ Where does your code run? · browser
+    ✔ What format do you want your config file to be in? · JavaScript
+    Local ESLint installation not found.
+    The config that you've selected requires the following dependencies:
+
+    eslint-plugin-react@latest eslint@latest
+    ✔ Would you like to install them now? · No / Yes
+    ✔ Which package manager do you want to use? · npm
+    Installing eslint-plugin-react@latest, eslint@latest
+    ```
+
+    - check [`.eslintrc.js`](./.eslintrc.js)
