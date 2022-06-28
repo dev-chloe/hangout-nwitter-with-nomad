@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Router from "Router";
 import AuthService from "services/AuthService/AuthService";
 
@@ -41,7 +42,9 @@ function App() {
           :
           "Initializing..."
         }
-        <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
+        <footer>&copy; {new Date().getFullYear()} Nwitter by
+          <a href="https://github.com/dev-chloe/hangout-nwitter-with-nomad#project" target="_blank"> Chloe</a>
+        </footer>
       </div>
     </div>
   );
