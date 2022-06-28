@@ -2,10 +2,6 @@
 
 Twitter (mini)clone with React and Firebase
 
-## 수료증
-
-[![certification](certification/certification.png)](https://nomadcoders.co/certs/13aeb294-9d04-4a3c-9eff-a7952f609fc2)
-
 ## Project
 
 ### How to run?
@@ -186,3 +182,7 @@ npx create-react-app hangout-nwitter-with-nomad
     ```
 
     - check [`.eslintrc.js`](./.eslintrc.js)
+
+## certification
+
+[![certification](certification/certification.png)](https://nomadcoders.co/certs/13aeb294-9d04-4a3c-9eff-a7952f609fc2)
