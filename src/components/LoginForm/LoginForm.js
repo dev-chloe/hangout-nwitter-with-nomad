@@ -1,6 +1,6 @@
 import { useState } from "react";
-import style from "./LoginForm.module.css";
 import AuthService from "services/AuthService";
+import style from "./LoginForm.module.css";
 
 const LoginForm = () => {
   const [isNewAccount, setIsNewAccount] = useState(true);
@@ -37,9 +37,9 @@ const Form = ({ isNewAccount, toggleForm }) => {
     <form onSubmit={onSubmit} className={`container ${style.wrapper}`}>
       <Input type="email" onChange={onChange} placeholder="Email" />
       <Input type="password" onChange={onChange} placeholder="Password" />
-      <ToggleBtn type="submit" classNm={`${style.input} ${style.submit}`} text={isNewAccount ? "Create Account" : "Login"} />
+      <ToggleButton type="submit" classNm={`${style.input} ${style.submit}`} text={isNewAccount ? "Create Account" : "Login"} />
       {error && <span className={style.error}>{error}</span>}
-      <ToggleBtn type="button" classNm={style.switch} toggleForm={toggleForm} text={isNewAccount ? "Sign In" : "Create Account"} />
+      <ToggleButton type="button" classNm={style.switch} toggleForm={toggleForm} text={isNewAccount ? "Sign In" : "Create Account"} />
     </form>
   );
 };
@@ -57,7 +57,7 @@ const Input = ({ type, placeholder, onChange }) => {
   );
 };
 
-const ToggleBtn = ({ toggleForm, text, classNm, type }) => (
+const ToggleButton = ({ toggleForm, text, classNm, type }) => (
   <input type={type} className={classNm} value={text} onClick={toggleForm && toggleForm} />
 );
 

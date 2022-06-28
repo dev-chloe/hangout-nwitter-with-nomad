@@ -51,16 +51,17 @@ const signOut = async () => {
 const checkAuthState = async (callback) => {
   auth.onAuthStateChanged(callback);
 };
-
+\
 const saveProfile = async (
   profile,
   successCallback = () => console.error("[FIXME] Not implemented! (for then) >"),
-  errorCallack = (error) => console.error("[FIXME] Not implemented! (for catch) >", error)
+  errorCallback = (error) => console.error("[FIXME] Not implemented! (for catch) >", error)
 ) => {
+  // Ref. https://firebase.google.com/docs/auth/web/manage-users?hl=ko#update_a_users_profile
   updateProfile(auth.currentUser, profile)
     .then(() => successCallback())
-    .catch((error) => errorCallack(error));
-};
+    .catch((error) => errorCallback(error));
+}
 
 const readNweetList = async (callback, creatorId) => {
   const firestoreQuery = getNweetListQuery(creatorId);
