@@ -51,7 +51,7 @@ const signOut = async () => {
 const checkAuthState = async (callback) => {
   auth.onAuthStateChanged(callback);
 };
-\
+
 const saveProfile = async (
   profile,
   successCallback = () => console.error("[FIXME] Not implemented! (for then) >"),
@@ -61,7 +61,7 @@ const saveProfile = async (
   updateProfile(auth.currentUser, profile)
     .then(() => successCallback())
     .catch((error) => errorCallback(error));
-}
+};
 
 const readNweetList = async (callback, creatorId) => {
   const firestoreQuery = getNweetListQuery(creatorId);
