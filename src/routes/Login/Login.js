@@ -1,14 +1,13 @@
-import LoginForm from "components/LoginForm/LoginForm";
-import SocialLoginButtons from "components/SocialLoginButtons/SocialLoginButtons";
+import LoginForm from "components/LoginForm";
+import SocialLoginButtons from "components/SocialLoginButtons";
 
-
-const Auth = () => {
+const Login = () => {
   return (
     <div className="container">
       <LoginForm />
       <SocialLoginButtons />
     </div>
   );
-}
+};
 
-export default Auth;
+export default Login;

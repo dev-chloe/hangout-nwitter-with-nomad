@@ -1,16 +1,16 @@
 import { useState } from "react";
 import style from "./LoginForm.module.css";
-import AuthService from "services/AuthService/AuthService";
+import AuthService from "services/AuthService";
 
 const LoginForm = () => {
   const [isNewAccount, setIsNewAccount] = useState(true);
   const toggleForm = () => {
     setIsNewAccount((prev) => !prev);
-  }
+  };
   return (
     <Form isNewAccount={isNewAccount} toggleForm={toggleForm} />
-  )
-}
+  );
+};
 
 const Form = ({ isNewAccount, toggleForm }) => {
   const [email, setEmail] = useState("");
@@ -23,7 +23,7 @@ const Form = ({ isNewAccount, toggleForm }) => {
     } else if (name === "password") {
       setPassword(value);
     }
-  }
+  };
   const onSubmit = async (event) => {
     event.preventDefault();
     if (isNewAccount) {
@@ -31,7 +31,7 @@ const Form = ({ isNewAccount, toggleForm }) => {
     } else {
       AuthService.login({ email, password }, setError);
     }
-  }
+  };
 
   return (
     <form onSubmit={onSubmit} className={`container ${style.wrapper}`}>
@@ -41,8 +41,8 @@ const Form = ({ isNewAccount, toggleForm }) => {
       {error && <span className={style.error}>{error}</span>}
       <ToggleBtn type="button" classNm={style.switch} toggleForm={toggleForm} text={isNewAccount ? "Sign In" : "Create Account"} />
     </form>
-  )
-}
+  );
+};
 
 const Input = ({ type, placeholder, onChange }) => {
   return (
@@ -54,11 +54,11 @@ const Input = ({ type, placeholder, onChange }) => {
       onChange={onChange}
       required
     />
-  )
-}
+  );
+};
 
 const ToggleBtn = ({ toggleForm, text, classNm, type }) => (
   <input type={type} className={classNm} value={text} onClick={toggleForm && toggleForm} />
-)
+);
 
 export default LoginForm;

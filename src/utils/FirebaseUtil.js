@@ -4,23 +4,24 @@ const Google = "google";
 const Github = "github";
 
 const getAuthProvider = (providerName) => {
-  if (!providerName || providerName === "") {
+  const isInvalidProviderName = !providerName || providerName === "";
+  if (isInvalidProviderName) {
     throw new Error("Invalid providerName");
   }
   switch (providerName) {
-    case Google:
-      return new GoogleAuthProvider();
-    case Github:
-      return new GithubAuthProvider();
-    default:
-      throw new Error(`No AuthProvider implementations: ${providerName}`);
+  case Google:
+    return new GoogleAuthProvider();
+  case Github:
+    return new GithubAuthProvider();
+  default:
+    throw new Error(`No AuthProvider implementations: ${providerName}`);
   }
-}
+};
 
 const FirebaseUtil = {
   Google,
   Github,
-  getAuthProvider,
-}
+  getAuthProvider
+};
 
 export default FirebaseUtil;

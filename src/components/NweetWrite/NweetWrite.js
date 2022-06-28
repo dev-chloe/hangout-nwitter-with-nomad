@@ -1,13 +1,14 @@
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
+import NweetService from "services/NweetService";
 import style from "./NweetWrite.module.css";
-import NweetService from "services/NweetService/NweetService";
 
 const NweetWrite = ({ userObj }) => {
   const [nweetText, setNweetText] = useState("");
   const [nweetImage, setNweetImage] = useState("");
   const fileInput = useRef();
+  
   const updateNewNweet = async (event) => {
     if (nweetText === "") {
       return;
@@ -20,14 +21,14 @@ const NweetWrite = ({ userObj }) => {
         setNweetImage("");
         fileInput.current.value = null;
       }
-    )
-  }
+    );
+  };
+
   return (
     <>
       <form onSubmit={updateNewNweet} className={style.form}>
         <InputContainer nweetText={nweetText} setNweetText={setNweetText} />
-        <AttachmentBtn fileInput={fileInput} setNweetImage={setNweetImage} />
-        <input type="submit" value="Nweet" />
+        <AttachmentButton fileInput={fileInput} setNweetImage={setNweetImage} />
         {
           nweetImage &&
           <Attachment
@@ -38,14 +39,14 @@ const NweetWrite = ({ userObj }) => {
         }
       </form>
     </>
-  )
-}
+  );
+};
 
 const InputContainer = ({ nweetText, setNweetText }) => {
   const onChange = (event) => {
     const { target: { value } } = event;
     setNweetText(value);
-  }
+  };
   return (
     <div className={style.input_container}>
       <input
@@ -58,10 +59,10 @@ const InputContainer = ({ nweetText, setNweetText }) => {
       />
       <input type="submit" value="&rarr;" className={style.arrow} />
     </div>
-  )
-}
+  );
+};
 
-const AttachmentBtn = ({ fileInput, setNweetImage }) => {
+const AttachmentButton = ({ fileInput, setNweetImage }) => {
   const onFileChange = (event) => {
     const { target: { files } } = event;
     const theFile = files[0];
@@ -69,9 +70,9 @@ const AttachmentBtn = ({ fileInput, setNweetImage }) => {
     reader.onloadend = (finishedEvent) => {
       const { currentTarget: { result } } = finishedEvent;
       setNweetImage(result);
-    }
+    };
     reader.readAsDataURL(theFile);
-  }
+  };
   return (
     <>
       <label htmlFor="attach-file" className={style.label}>
@@ -87,8 +88,8 @@ const AttachmentBtn = ({ fileInput, setNweetImage }) => {
         className={style.not_view}
       />
     </>
-  )
-}
+  );
+};
 
 const Attachment = ({ nweetImage, setNweetImage, fileInput }) => {
   const onClearAttachment = () => {
@@ -97,13 +98,13 @@ const Attachment = ({ nweetImage, setNweetImage, fileInput }) => {
   };
   return (
     <div className={style.attachment} >
-      <img src={nweetImage} alt="img" style={{ backgroundImage: nweetImage, }} />
+      <img src={nweetImage} alt="img" style={{ backgroundImage: nweetImage }} />
       <button className={style.form_clear} onClick={onClearAttachment}>
         <span>Remove</span>
         <FontAwesomeIcon icon={faTimes} />
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default NweetWrite;

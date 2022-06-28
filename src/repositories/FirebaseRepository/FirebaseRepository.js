@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { addDoc, collection, deleteDoc, doc, getFirestore, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -23,34 +23,34 @@ const createNewAccount = async ({
   email,
   password,
   callbackError = (error) => {
-    console.log(("[ERROR] createNewAccount >", error))
+    console.log(("[ERROR] createNewAccount >", error));
   }
 }) => {
   await createUserWithEmailAndPassword(auth, email, password)
     .catch(callbackError);
-}
+};
 
 const signIn = async ({
   email,
   password,
   callbackError = (error) => {
-    console.log(("[ERROR] signIn >", error))
+    console.log(("[ERROR] signIn >", error));
   }
 }) => {
   await signInWithEmailAndPassword(auth, email, password).catch(callbackError);
-}
+};
 
 const signInWithAuthProvider = async (authProvider) => {
   await signInWithPopup(auth, authProvider);
-}
+};
 
 const signOut = async () => {
   auth.signOut();
-}
+};
 
 const checkAuthState = async (callback) => {
   auth.onAuthStateChanged(callback);
-}
+};
 
 const saveProfile = async (
   profile,
@@ -60,34 +60,34 @@ const saveProfile = async (
   updateProfile(auth.currentUser, profile)
     .then(() => successCallback())
     .catch((error) => errorCallack(error));
-}
+};
 
 const readNweetList = async (callback, creatorId) => {
   const firestoreQuery = getNweetListQuery(creatorId);
-  executeQuery(firestoreQuery, callback)
-}
+  executeQuery(firestoreQuery, callback);
+};
 
 const getNweetListQuery = (creatorId) => {
   return creatorId
     ? query(collection(firestore, "nweets"), where("creatorId", "==", creatorId), orderBy("createdAt", "desc"))
-    : query(collection(firestore, "nweets"), orderBy("createdAt", "desc"))
-}
+    : query(collection(firestore, "nweets"), orderBy("createdAt", "desc"));
+};
 
 const executeQuery = async (firestoreQuery, callback) => {
   onSnapshot(firestoreQuery, snapshot => {
     const nweetList = snapshot.docs.map(doc => ({
       id: doc.id,
-      ...doc.data(),
-    }))
+      ...doc.data()
+    }));
     callback(nweetList);
-  })
-}
+  });
+};
 
 const saveAttachment = async (uid, attachment) => {
   const attachmentRef = ref(storage, `${uid}/${uuidv4()}`);
   const response = await uploadString(attachmentRef, attachment, "data_url");
   return await getDownloadURL(response.ref);
-}
+};
 
 const saveNweet = async (
   { nweetText, uid, imageDownloadUrl },
@@ -102,11 +102,11 @@ const saveNweet = async (
   })
     .then(() => successCallback())
     .catch((error) => errorCallack(error));
-}
+};
 
 const readNweet = ({ id }) => {
   return doc(firestore, "nweets", id);
-}
+};
 
 const updateNweet = async (
   { nweetText, nweet },
@@ -114,19 +114,19 @@ const updateNweet = async (
   errorCallack = (error) => console.error("[FIXME] Not implemented! (for catch) >", error)
 ) => {
   await updateDoc(nweet, {
-    text: nweetText,
+    text: nweetText
   })
     .then(() => successCallback())
     .catch((error) => errorCallack(error));
-}
+};
 
 const deleteNweet = async (nweet) => {
   await deleteDoc(nweet);
-}
+};
 
 const deletNweetImage = async (nweetImageUrl) => {
   return await deleteObject(ref(storage, nweetImageUrl));
-}
+};
 
 const FirebaseRepository = {
   createNewAccount,
@@ -142,6 +142,6 @@ const FirebaseRepository = {
   updateNweet,
   deleteNweet,
   deletNweetImage
-}
+};
 
 export default FirebaseRepository;

@@ -20,18 +20,16 @@ const Navigation = ({ displayName }) => {
         }
       </ul>
     </nav>
-  )
-}
+  );
+};
 
 const ProfileLink = ({ displayName }) => {
   return (
     <Link to="/profile" className={style.profile_wrap}>
       <FontAwesomeIcon icon={faUser} className={style.icon} />
-      <span>
-        {displayName}'s Profile
-      </span>
+      <span>{displayName}&apos;s Profile</span>
     </Link>
-  )
-}
+  );
+};
 
 export default Navigation;

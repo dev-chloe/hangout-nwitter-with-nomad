@@ -39,5 +39,9 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://dev-chloe.github.io/hangout-nwitter-with-nomad"
+  "homepage": "https://dev-chloe.github.io/hangout-nwitter-with-nomad",
+  "devDependencies": {
+    "eslint": "^8.18.0",
+    "eslint-plugin-react": "^7.30.1"
+  }
 }
