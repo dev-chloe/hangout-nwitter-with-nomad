@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Router from "Router";
-import { updateProfile } from "firebase/auth";
-import AuthService from "services/AuthService";
+import AuthService from "services/AuthService/AuthService";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -17,35 +16,35 @@ function App() {
           displayName: user.displayName ?? user.email.split("@")[0],
           uid: user.uid,
           email: user.email,
-          updateProfile: () => updateProfile(user, {
+          updateProfile: () => AuthService.saveProfile({
             displayName: user.displayName
-          }),
+          })
         });
         return;
       }
       setisLoggedIn(false);
       setUserObj(null);
     });
-  }
-
+  };
   useEffect(() => {
     refreshUser();
-  }, [])
-
+  }, []);
   return (
     <div className="wrapper">
-      {init ? (
-        <>
+      <div className="contents_wrapper">
+        {init ?
           <Router
             refreshUser={refreshUser}
             isLoggedIn={isLoggedIn}
             userObj={userObj}
           />
-        </>
-      ) :
-        "Initializing..."
-      }
-      <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
+          :
+          "Initializing..."
+        }
+        <footer>&copy; {new Date().getFullYear()} Nwitter by
+          <a href="https://github.com/dev-chloe/hangout-nwitter-with-nomad#project" target="_blank" rel="noreferrer"> Chloe</a>
+        </footer>
+      </div>
     </div>
   );
 }

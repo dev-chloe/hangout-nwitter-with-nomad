@@ -1,8 +1,8 @@
-import Navigation from "components/Navigation";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
-import Login from "routes/Login";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
+import Login from "routes/Login";
+import Navigation from "components/Navigation";
 
 const Router = ({ refreshUser, isLoggedIn, userObj }) => {
   return (
@@ -15,14 +15,12 @@ const Router = ({ refreshUser, isLoggedIn, userObj }) => {
             <Route path="/profile" element={<Profile userObj={userObj} refreshUser={refreshUser} />} />
           </>
           :
-          <>
-            <Route path="/" element={<Login />} />
-          </>
+          <Route path="/" element={<Login />} />
         }
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </HashRouter>
-  )
-}
+  );
+};
 
 export default Router;

@@ -1,30 +1,38 @@
 import { useEffect, useState } from "react";
-import NweetService from "services/NweetService";
-import NweetList from "components/NweetList";
 import ProfileForm from "components/ProfileForm";
-import "./Profile.css";
+import NweetList from "components/NweetList";
+import NweetService from "services/NweetService";
 import AuthService from "services/AuthService";
+import style from "./Profile.module.css";
 
 const Profile = ({ refreshUser, userObj }) => {
-  const logout = () => {
-    AuthService.logout();
-    refreshUser();
-  }
-
   const [nweetList, setNweetList] = useState([]);
   const creatorId = userObj.uid;
   useEffect(() => {
-    NweetService.queryNweetListByCreatorId({ creatorId, setNweetList });
+    NweetService.getNweetListByCreatorID({ creatorId, setNweetList });
   }, []);
-
   return (
     <div className="container">
-      <ProfileForm callAfterUpdateProfile={refreshUser} userObj={userObj} />
-      <button className="form_btn cancel_btn logout" onClick={logout}>Logout</button>
-      <NweetList nweetList={nweetList} creatorId={creatorId} />
+      <ProfileForm userObj={userObj} callAfterUpdateProfile={refreshUser} />
+      <LogoutButton refreshUser={refreshUser} />
+      <NweetList creatorId={creatorId} nweetList={nweetList} />
     </div>
-  )
+  );
 };
 
+const LogoutButton = ({ refreshUser }) => {
+  const logout = () => {
+    AuthService.logout();
+    refreshUser();
+  };
+  return (
+    <button
+      className={`form_btn cancel_btn ${style.logout}`}
+      onClick={logout}
+    >
+      Logout
+    </button>
+  );
+};
 
 export default Profile;

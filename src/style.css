@@ -8,13 +8,18 @@ input {
   all: unset;
   box-sizing: border-box;
   appearance: none;
+  font-size: 16px;
+}
+
+input::placeholder {
+  color: #e7e7e7;
 }
 
 body {
   background-color: black;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: white;
 }
 
@@ -23,6 +28,7 @@ button {
   color: black;
   border: none;
   cursor: pointer;
+  font-size: 16px;
 }
 
 a {
@@ -34,40 +40,27 @@ form {
   width: 100%;
 }
 
-.mg_top {
-  margin-top: 10px;
-}
-
 .wrapper {
-  max-width: 890px;
   width: 100%;
+  height: 100vh;
   margin: 0 auto;
-  margin-top: 80px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
-.nweet_icon {
-  color: #04AAFF;
-  font-size: 2em;
-}
-
-.nav_wrap {
+.contents_wrapper {
+  padding: 20px;
+  overflow-y: auto;
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.profile {
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  font-size: 12px;
+  flex-direction: column;
+  width: 100%;
+}
+
+footer {
+  margin: 30px 0;
 }
 
 .nweet-input::placeholder {
@@ -77,87 +70,37 @@ form {
 
 .container {
   width: 100%;
-  max-width: 320px;
+  max-width: 420px;
   display: flex;
   flex-direction: column;
 }
 
-/* Nwitter Factory */
-
-.factory_form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.form_input {
   width: 100%;
-}
-
-.factory_input_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  position: relative;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.factory_input {
-  flex-grow: 1;
-  height: 40px;
-  padding: 0px 20px;
-  color: white;
-  border: 1px solid #04aaff;
+  padding: 10px 20px;
   border-radius: 20px;
-  font-weight: 500;
-  font-size: 12px;
+  border: 1px solid black;
+  text-align: center;
+  background-color: white;
+  color: black;
 }
 
-.factory_input_arrow {
-  position: absolute;
-  right: 0;
+.form_btn {
+  cursor: pointer;
+  width: 100%;
+  padding: 11px 20px;
+  text-align: center;
+  color: white;
+  border-radius: 20px;
   background-color: #04aaff;
-  height: 40px;
-  width: 40px;
-  padding: 10px 0px;
-  text-align: center;
-  border-radius: 20px;
-  color: white;
-}
-
-.factory_input_label {
-  color: #04aaff;
   cursor: pointer;
 }
 
-.factory_input_label span {
-  margin-right: 10px;
-  font-size: 12px;
-}
-
-.factory_form_attachment {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.factory_form_attachment img {
-  height: 80px;
-  width: 80px;
-  border-radius: 40px;
-}
-
-.factory_form_clear {
-  color: #04aaff;
-  cursor: pointer;
-  text-align: center;
+.form_btn.last_btn {
   margin-top: 10px;
 }
 
-.factory_form_clear span {
-  margin-right: 10px;
-  font-size: 12px;
-}
-
-footer {
-  margin: 30px 0;
+.cancel_btn {
+  cursor: pointer;
+  background-color: tomato;
 }

@@ -1,3 +1,3 @@
-import FirebaseRepository from "./FirebaseRepository"
+import FirebaseRepository from "./FirebaseRepository";
 
 export default FirebaseRepository;

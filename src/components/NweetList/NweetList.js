@@ -1,14 +1,18 @@
-import Nweet from "./Nweet";
-import "./NweetList.css";
+import Nweet from "components/Nweet/Nweet";
+import style from "./NweetList.module.css";
 
-const NweetList = ({ nweetList, creatorId }) => {
+const NweetList = ({ creatorId, nweetList }) => {
   return (
-    <div className="nweet_list">
+    <div className={style.wrapper}>
       {nweetList.map((nweet) => (
-        <Nweet key={nweet.id} nweetObj={nweet} isOwned={creatorId && nweet.creatorId === creatorId} />
+        <Nweet
+          key={nweet.id}
+          nweetObj={nweet}
+          isOwned={creatorId && nweet.creatorId === creatorId}
+        />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default NweetList;

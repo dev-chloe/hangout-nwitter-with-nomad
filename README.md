@@ -8,6 +8,22 @@ Twitter (mini)clone with React and Firebase
 
 ## Project
 
+### How to run?
+
+```bash
+# Clone repository
+git clone https://github.com/dev-chloe/hangout-nwitter-with-nomad.git
+cd hangout-nwitter-with-nomad
+
+# Install node_modules
+npm install
+
+# Run application
+npm start
+```
+
+## History
+
 ### Initiation
 
 ```bash
@@ -27,7 +43,7 @@ npx create-react-app hangout-nwitter-with-nomad
 
     ```javascript
     // set SDK 
-    // fbase.js
+    // FirebaseRepository.js
     import { initializeApp } from "firebase/app";
 
     const firebaseConfig = {

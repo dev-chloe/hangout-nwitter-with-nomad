@@ -1,56 +1,47 @@
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import "./SocialLoginButtons.css";
-
-const Google = "Google";
-const GitHub = "GitHub";
+import FirebaseUtil from "utils/FirebaseUtil";
+import AuthService from "services/AuthService";
+import style from "./SocialLoginButtons.module.css";
 
 const SocialLoginButtons = () => {
   return (
-    <div className="social_login_btns">
-      <SocialLoginButton vendor={Google} />
-      <SocialLoginButton vendor={GitHub} />
-      <SocialLoginButton vendor="Instagram" />
+    <div className={style.btn_wrapper}>
+      <SocialLoginButton authProviderName={FirebaseUtil.Google} />
+      <SocialLoginButton authProviderName={FirebaseUtil.Github} />
+      <SocialLoginButton authProviderName={FirebaseUtil.Instagram} />
     </div>
-  )
-}
+  );
+};
 
-const SocialLoginButton = ({ vendor }) => {
-  let socialIcon = null;
-  switch (vendor) {
-    case Google:
-      socialIcon = <FontAwesomeIcon icon={faGoogle} />
-      break;
-    case GitHub:
-      socialIcon = <FontAwesomeIcon icon={faGithub} />
-      break;
-    default:
-      console.warn(`No SocialIcon implementations: ${vendor}`)
-      return;
-  }
-  return (
-    <button className="social_login_btn" name={vendor} onClick={onSocialClick}>
-      Continue with {vendor} {socialIcon}
+const SocialLoginButton = ({ authProviderName }) => {
+  const socialIcon = getSocialIcon({ authProviderName });
+  const socialLoginClick = async (event) => {
+    const { target: { name } } = event;
+    const authProviderName = name;
+    AuthService.popupLogin(authProviderName);
+  };
+  return (socialIcon) && (
+    <button
+      className={style.btn}
+      name={authProviderName}
+      onClick={socialLoginClick}
+    >
+      Continue with {authProviderName} {socialIcon}
     </button>
-  )
-}
+  );
+};
 
-const onSocialClick = async (event) => {
-  const { target: { name } } = event;
-  let provider = null;
-  switch (name) {
-    case Google:
-      provider = new GoogleAuthProvider();
-      break;
-    case GitHub:
-      provider = new GithubAuthProvider();
-      break;
-    default:
-      throw new Error(`No AuthProvider implementations: ${vender}`);
+const getSocialIcon = ({ authProviderName }) => {
+  switch (authProviderName) {
+  case FirebaseUtil.Google:
+    return <FontAwesomeIcon icon={faGoogle} />;
+  case FirebaseUtil.Github:
+    return <FontAwesomeIcon icon={faGithub} />;
+  default:
+    console.warn(`no socialIcon implementations: ${authProviderName}`);
+    return null;
   }
-  const firebaseAuthSystem = getAuth();
-  await signInWithPopup(firebaseAuthSystem, provider);
-}
+};
 
 export default SocialLoginButtons;

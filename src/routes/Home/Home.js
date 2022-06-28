@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
-
-import NweetList from "components/NweetList";
 import NweetService from "services/NweetService";
-import NweetWritter from "components/NweetWritter";
+import NweetWrite from "components/NweetWrite";
+import NweetList from "components/NweetList";
 
 const Home = ({ userObj }) => {
   const [nweetList, setNweetList] = useState([]);
   const creatorId = userObj.uid;
   useEffect(() => {
-    NweetService.queryNweetList({ setNweetList });
+    NweetService.getNweetList({ setNweetList });
   }, []);
-
   return (
     <div className="container">
-      <NweetWritter userObj={userObj} />
+      <NweetWrite userObj={userObj} />
       <NweetList nweetList={nweetList} creatorId={creatorId} />
-    </div>
-  )
+    </div >
+  );
 };
 
 export default Home;

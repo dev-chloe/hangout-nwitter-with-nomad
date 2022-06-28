@@ -1,22 +1,26 @@
 import { useState } from "react";
 import AuthService from "services/AuthService";
+import style from "./ProfileForm.module.css";
 
-const ProfileForm = ({ callAfterUpdateProfile, userObj }) => {
+const ProfileForm = ({ userObj, callAfterUpdateProfile }) => {
   const oldDisplayName = userObj.displayName;
   const [newDisplayName, setNewDisplayName] = useState(oldDisplayName);
+
   const onChange = (event) => {
     const { target: { value } } = event;
     setNewDisplayName(value);
-  }
+  };
+
   const saveUserInfo = async (event) => {
     event.preventDefault();
     const isChanged = oldDisplayName !== newDisplayName;
     if (isChanged) {
       AuthService.saveProfile({ displayName: newDisplayName }, callAfterUpdateProfile);
     }
-  }
+  };
+
   return (
-    <form className="profile_form" onSubmit={saveUserInfo}>
+    <form className={style.form} onSubmit={saveUserInfo}>
       <input
         className="form_input"
         type="text"
@@ -26,12 +30,12 @@ const ProfileForm = ({ callAfterUpdateProfile, userObj }) => {
         autoFocus
       />
       <input
-        className="form_btn update_btn"
+        className="form_btn last_btn"
         type="submit"
         value="Update Profile"
       />
     </form>
-  )
-}
+  );
+};
 
 export default ProfileForm;
