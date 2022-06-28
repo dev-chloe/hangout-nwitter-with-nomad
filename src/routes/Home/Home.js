@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import NweetService from "services/NweetService";
-import NweetWrite from "components/NweetWrite";
+import NweetForm from "components/NweetForm";
 import NweetList from "components/NweetList";
 
 const Home = ({ userObj }) => {
@@ -11,7 +11,7 @@ const Home = ({ userObj }) => {
   }, []);
   return (
     <div className="container">
-      <NweetWrite userObj={userObj} />
+      <NweetForm userObj={userObj} />
       <NweetList nweetList={nweetList} creatorId={creatorId} />
     </div >
   );

@@ -2,9 +2,9 @@ import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 import NweetService from "services/NweetService";
-import style from "./NweetWrite.module.css";
+import style from "./NweetForm.module.css";
 
-const NweetWrite = ({ userObj }) => {
+const NweetForm = ({ userObj }) => {
   const [nweetText, setNweetText] = useState("");
   const [nweetImage, setNweetImage] = useState("");
   const fileInput = useRef();
@@ -107,4 +107,4 @@ const Attachment = ({ nweetImage, setNweetImage, fileInput }) => {
   );
 };
 
-export default NweetWrite;
+export default NweetForm;
