@@ -1,4 +1,5 @@
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import PropTypes from "prop-types";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Login from "routes/Login";
@@ -21,6 +22,12 @@ const Router = ({ refreshUser, isLoggedIn, userObj }) => {
       </Routes>
     </HashRouter>
   );
+};
+
+Router.propTypes = {
+  refreshUser: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  userObj:  PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.object.isRequired])
 };
 
 export default Router;

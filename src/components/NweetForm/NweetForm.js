@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import PropTypes from "prop-types";
 import NweetService from "services/NweetService";
 import InputContainer from "./InputContainer";
 import AttachmentButton from "./AttachmentButton";
@@ -41,6 +42,10 @@ const NweetForm = ({ userObj }) => {
       </form>
     </>
   );
+};
+
+NweetForm.propTypes = {
+  userObj: PropTypes.object.isRequired
 };
 
 export default NweetForm;

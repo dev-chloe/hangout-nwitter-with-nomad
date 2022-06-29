@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import AuthService from "services/AuthService";
 import style from "./ProfileForm.module.css";
 
@@ -36,6 +37,11 @@ const ProfileForm = ({ userObj, callAfterUpdateProfile }) => {
       />
     </form>
   );
+};
+
+ProfileForm.propTypes = {
+  userObj: PropTypes.object.isRequired,
+  callAfterUpdateProfile: PropTypes.func.isRequired
 };
 
 export default ProfileForm;

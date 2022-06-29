@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import style from "./InputContainer.module.css";
 
 const InputContainer = ({ nweetText, setNweetText }) => {
@@ -18,6 +19,11 @@ const InputContainer = ({ nweetText, setNweetText }) => {
       <input type="submit" value="&rarr;" className={style.arrow} />
     </div>
   );
+};
+
+InputContainer.propTypes = {
+  nweetText: PropTypes.string.isRequired,
+  setNweetText: PropTypes.func.isRequired
 };
 
 export default InputContainer;

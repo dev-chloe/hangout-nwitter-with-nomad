@@ -1,5 +1,6 @@
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PropTypes from "prop-types";
 import FirebaseUtil from "utils/FirebaseUtil";
 import AuthService from "services/AuthService";
 import style from "./SocialLoginButtons.module.css";
@@ -21,6 +22,7 @@ const SocialLoginButton = ({ authProviderName }) => {
     const authProviderName = name;
     AuthService.popupLogin(authProviderName);
   };
+
   return (socialIcon) && (
     <button
       className={style.btn}
@@ -42,6 +44,14 @@ const getSocialIcon = ({ authProviderName }) => {
     console.warn(`no socialIcon implementations: ${authProviderName}`);
     return null;
   }
+};
+
+SocialLoginButton.propTypes = {
+  authProviderName: PropTypes.string
+};
+
+getSocialIcon.propTypes = {
+  authProviderName: PropTypes.string.isRequired
 };
 
 export default SocialLoginButtons;

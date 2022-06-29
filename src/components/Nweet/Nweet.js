@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NweetService from "services/NweetService";
@@ -34,7 +35,6 @@ const Nweet = ({ nweetObj, isOwned }) => {
     nweetText,
     nweetImgUrl: nweetObj.attachmentUrl
   };
-
   return (
     <div className={style.nweet}>
       {
@@ -104,5 +104,24 @@ const getActionButtonIcon = (action) => {
     return null;
   }
 };
+
+Nweet.propTypes = {
+  nweetObj: PropTypes.object.isRequired,
+  isOwned: PropTypes.bool.isRequired
+};
+
+NweeEditMode.propTypes = {
+  editProps: PropTypes.object.isRequired
+};
+
+NweetDisplayMode.propTypes = {
+  displayProps: PropTypes.object.isRequired
+};
+
+ActionButton.propTypes = {
+  action: PropTypes.string.isRequired,
+  clickFn: PropTypes.func.isRequired
+};
+
 
 export default Nweet;

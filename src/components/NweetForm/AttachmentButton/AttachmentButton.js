@@ -1,5 +1,6 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PropTypes from "prop-types";
 import style from "./AttachmentButton.module.css";
 
 const AttachmentButton = ({ fileInput, setNweetImage }) => {
@@ -29,6 +30,11 @@ const AttachmentButton = ({ fileInput, setNweetImage }) => {
       />
     </>
   );
+};
+
+AttachmentButton.propTypes = {
+  fileInput: PropTypes.object.isRequired,
+  setNweetImage: PropTypes.func.isRequired
 };
 
 export default AttachmentButton;

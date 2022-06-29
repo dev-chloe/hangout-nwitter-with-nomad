@@ -1,4 +1,5 @@
 import Nweet from "components/Nweet/Nweet";
+import PropTypes from "prop-types";
 import style from "./NweetList.module.css";
 
 const NweetList = ({ creatorId, nweetList }) => {
@@ -13,6 +14,11 @@ const NweetList = ({ creatorId, nweetList }) => {
       ))}
     </div>
   );
+};
+
+NweetList.propTypes = {
+  creatorId: PropTypes.string.isRequired,
+  nweetList: PropTypes.array.isRequired
 };
 
 export default NweetList;

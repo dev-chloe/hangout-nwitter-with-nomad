@@ -2,6 +2,7 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import style from "./Navigation.module.css";
 
 const Navigation = ({ displayName }) => {
@@ -30,6 +31,14 @@ const ProfileLink = ({ displayName }) => {
       <span>{displayName}&apos;s Profile</span>
     </Link>
   );
+};
+
+Navigation.propTypes = {
+  displayName: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+};
+
+ProfileLink.propTypes = {
+  displayName: PropTypes.string.isRequired
 };
 
 export default Navigation;

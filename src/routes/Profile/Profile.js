@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import ProfileForm from "components/ProfileForm";
 import NweetList from "components/NweetList";
 import NweetService from "services/NweetService";
@@ -11,6 +12,7 @@ const Profile = ({ refreshUser, userObj }) => {
   useEffect(() => {
     NweetService.getNweetListByCreatorID({ creatorId, setNweetList });
   }, []);
+  console.log(typeof(refreshUser));
   return (
     <div className="container">
       <ProfileForm userObj={userObj} callAfterUpdateProfile={refreshUser} />
@@ -33,6 +35,15 @@ const LogoutButton = ({ refreshUser }) => {
       Logout
     </button>
   );
+};
+
+Profile.propTypes = {
+  refreshUser: PropTypes.func.isRequired,
+  userObj: PropTypes.object.isRequired
+};
+
+LogoutButton.propTypes = {
+  refreshUser: PropTypes.func.isRequired
 };
 
 export default Profile;

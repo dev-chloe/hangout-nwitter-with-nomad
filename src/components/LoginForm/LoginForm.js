@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import AuthService from "services/AuthService";
 import style from "./LoginForm.module.css";
 
@@ -32,7 +33,7 @@ const Form = ({ isNewAccount, toggleForm }) => {
       AuthService.login({ email, password }, setError);
     }
   };
-
+  
   return (
     <form onSubmit={onSubmit} className={`container ${style.wrapper}`}>
       <Input type="email" onChange={onChange} placeholder="Email" />
@@ -60,5 +61,23 @@ const Input = ({ type, placeholder, onChange }) => {
 const ToggleButton = ({ toggleForm, text, classNm, type }) => (
   <input type={type} className={classNm} value={text} onClick={toggleForm && toggleForm} />
 );
+
+Form.propTypes = {
+  isNewAccount: PropTypes.bool.isRequired,
+  toggleForm: PropTypes.func.isRequired
+};
+
+Input.propTypes = {
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+ToggleButton.propTypes = {
+  toggleForm: PropTypes.func,
+  text: PropTypes.string.isRequired,
+  classNm: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
+};
 
 export default LoginForm;

@@ -34,6 +34,6 @@ module.exports = {
     "no-empty": "warn",
 
     // override option
-    "react/prop-types": "off" // TODO: https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
+    "react/prop-types": "warn" // TODO: https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
   }
 };
