@@ -3,13 +3,13 @@ import Router from "Router";
 import AuthService from "services/AuthService/AuthService";
 
 function App() {
-  const [init, setInit] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
 
   const refreshUser = () => {
     AuthService.refresh((user) => {
-      setInit(true);
+      setIsReady(true);
       if (user) {
         setisLoggedIn(true);
         setUserObj({
@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="wrapper">
       <div className="contents_wrapper">
-        {init ?
+        {isReady ?
           <Router
             refreshUser={refreshUser}
             isLoggedIn={isLoggedIn}

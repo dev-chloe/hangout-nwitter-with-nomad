@@ -1,0 +1,13 @@
+.label {
+  color: #04aaff;
+  cursor: pointer;
+}
+
+.label span {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.not_view {
+  opacity: 0;
+}

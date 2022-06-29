@@ -1,24 +1,8 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.input_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  position: relative;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
 .attachment {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .attachment img {
@@ -29,11 +13,22 @@
 }
 
 .form_clear {
+  background-color: transparent;
   color: #04aaff;
   cursor: pointer;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 15px;
+  border: 1px solid #04aaff;
+  padding: 7px 15px;
+  border-radius: 25px;
+  transition: background-color .3s, color .3s;
 }
+
+.form_clear:hover {
+  background-color: #04aaff;
+  color: #FFFFFF;
+}
+
 
 .form_clear span {
   margin-right: 10px;

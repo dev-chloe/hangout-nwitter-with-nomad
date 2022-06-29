@@ -1,0 +1,32 @@
+.input_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input {
+  flex-grow: 1;
+  height: 45px;
+  padding: 0px 20px;
+  color: white;
+  border: 1px solid #04aaff;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.arrow {
+  position: absolute;
+  right: 0;
+  background-color: #04aaff;
+  height: 45px;
+  width: 45px;
+  padding: 10px 0px;
+  text-align: center;
+  border-radius: 25px;
+  color: white;
+}
