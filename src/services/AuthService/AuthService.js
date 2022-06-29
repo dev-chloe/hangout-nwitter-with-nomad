@@ -16,7 +16,7 @@ const signUp = ({ email, password }, setError) => {
       setError("회원가입 과정이 원활하지 않습니다. 잠시 후 재시도 해주세요.");
     }
   };
-  FirebaseRepository.createNewAccount({
+  FirebaseRepository.authRepo.createNewAccount({
     email,
     password,
     callbackError: handleSignUpError
@@ -39,7 +39,7 @@ const login = ({ email, password }, setError) => {
       setError("로그인 과정이 원활하지 않습니다. 잠시 후 재시도 해주세요.");
     }
   };
-  FirebaseRepository.signIn({
+  FirebaseRepository.authRepo.signIn({
     email,
     password,
     callbackError: hadleLoginError
@@ -48,19 +48,19 @@ const login = ({ email, password }, setError) => {
 
 const popupLogin = (authProviderName) => {
   const authProvider = FirebaseUtil.getAuthProvider(authProviderName);
-  FirebaseRepository.signInWithAuthProvider(authProvider);
+  FirebaseRepository.authRepo.signInWithAuthProvider(authProvider);
 };
 
 const logout = () => {
-  FirebaseRepository.signOut();
+  FirebaseRepository.authRepo.signOut();
 };
 
 const refresh = (callback) => {
-  FirebaseRepository.checkAuthState(callback);
+  FirebaseRepository.authRepo.checkAuthState(callback);
 };
 
 const saveProfile = (profile, successCallback, errorCallack) => {
-  FirebaseRepository.saveProfile(profile, successCallback, errorCallack);
+  FirebaseRepository.authRepo.saveProfile(profile, successCallback, errorCallack);
 };
 
 const AuthService = {

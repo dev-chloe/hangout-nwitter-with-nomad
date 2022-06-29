@@ -1,32 +1,32 @@
 import FirebaseRepository from "repositories/FirebaseRepository";
 
 const getNweetList = async ({ setNweetList }) => {
-  FirebaseRepository.readNweetList(setNweetList);
+  FirebaseRepository.firestoreRepo.readNweetList(setNweetList);
 };
 
 const getNweetListByCreatorID = async ({ setNweetList, creatorId }) => {
-  FirebaseRepository.readNweetList(setNweetList, creatorId);
+  FirebaseRepository.firestoreRepo.readNweetList(setNweetList, creatorId);
 };
 
 const addNewNweet = async ({ uid, nweetText, nweetImage }, successCallback) => {
-  const imageDownloadUrl = !!nweetImage && await FirebaseRepository.saveAttachment(uid, nweetImage);
-  FirebaseRepository.saveNweet({ uid, nweetText, imageDownloadUrl }, successCallback);
+  const imageDownloadUrl = !!nweetImage && await FirebaseRepository.storageRepo.saveAttachment(uid, nweetImage);
+  FirebaseRepository.firestoreRepo.saveNweet({ uid, nweetText, imageDownloadUrl }, successCallback);
 };
 
 const getNweet = (id) => {
-  return FirebaseRepository.readNweet(id);
+  return FirebaseRepository.firestoreRepo.readNweet(id);
 };
 
 const editNweet = async ({ nweetText, nweet }, successCallback) => {
-  FirebaseRepository.updateNweet({ nweetText, nweet }, successCallback);
+  FirebaseRepository.firestoreRepo.updateNweet({ nweetText, nweet }, successCallback);
 };
 
 const removeNweet = async (nweet, nweetImageUrl) => {
   const hasNweetImageUrl = !!nweetImageUrl;
   if (hasNweetImageUrl) {
-    await FirebaseRepository.deletNweetImage(nweetImageUrl);
+    await FirebaseRepository.storageRepo.deletNweetImage(nweetImageUrl);
   }
-  FirebaseRepository.deleteNweet(nweet);
+  FirebaseRepository.firestoreRepo.deleteNweet(nweet);
 };
 
 const NweetService = {
