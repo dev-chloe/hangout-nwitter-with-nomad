@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import AuthService from "services/AuthService";
-import style from "./ProfileForm.module.css";
+import style from "./ProfileForm.module.scss";
 
 const ProfileForm = ({ userObj, callAfterUpdateProfile }) => {
   const oldDisplayName = userObj.displayName;

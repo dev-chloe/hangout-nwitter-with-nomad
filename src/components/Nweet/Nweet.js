@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NweetService from "services/NweetService";
-import style from "./Nweet.module.css";
+import style from "./Nweet.module.scss";
 
 const Nweet = ({ nweetObj, isOwned }) => {
   const [editing, setEditing] = useState(false);

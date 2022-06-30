@@ -3,7 +3,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import style from "./Navigation.module.css";
+import style from "./Navigation.module.scss";
 
 const Navigation = ({ displayName }) => {
   return (

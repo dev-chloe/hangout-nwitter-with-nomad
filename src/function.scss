@@ -1,0 +1,63 @@
+@import "https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css";
+
+@mixin css($w: null, $maxW: null, $h: null, $maxH: null, $d: null, $ai: null, $jc: null, $fd: null, $mg: null, $mgT: null, $mgB: null, $mgL: null, $mgR: null, $pd: null, $pdT: null, $pdB: null, $pdL: null, $pdR: null, $bor: null, $borT: null, $borB: null, $borL: null, $borR: null, $borRa: null, $c: null, $fs: null, $fw: null, $ta: null, $bg: null, $p: null, $t: null, $b: null, $l: null, $r: null) {
+  width: $w;
+  max-width: $maxW;
+  height: $h;
+  max-height: $maxH;
+  display: $d;
+  align-items: $ai;
+  justify-content: $jc;
+  flex-direction: $fd;
+  margin: $mg;
+  margin-top: $mgT;
+  margin-bottom: $mgB;
+  margin-left: $mgL;
+  margin-right: $mgR;
+  padding: $pd;
+  padding-top: $pdT;
+  padding-bottom: $pdB;
+  padding-left: $pdL;
+  padding-right: $pdR;
+  border: $bor;
+  border-top: $borT;
+  border-bottom: $borB;
+  border-left: $borL;
+  border-right: $borR;
+  border-radius: $borRa;
+  color: $c;
+  font-size: $fs;
+  font-weight: $fw;
+  text-align: $ta;
+  background: $bg;
+  position: $p;
+  top: $t;
+  bottom: $b;
+  left: $l;
+  right: $r;
+}
+
+@mixin rel ($w: null, $maxW: null, $h: null, $maxH: null, $d: null, $ai: null, $jc: null, $fd: null, $mg: null, $mgT: null, $mgB: null, $mgL: null, $mgR: null, $pd: null, $pdT: null, $pdB: null, $pdL: null, $pdR: null, $bor: null, $borT: null, $borB: null, $borL: null, $borR: null, $borRa: null, $c: null, $fs: null, $fw: null, $ta: null, $bg: null, $p: null, $t: null, $b: null, $l: null, $r: null) {
+  $p: relative;
+  @include css($w, $maxW, $h, $maxH, $d, $ai, $jc, $fd, $mg, $mgT, $mgB, $mgL, $mgR, $pd, $pdT, $pdB, $pdL, $pdR, $bor, $borT, $borB, $borL, $borR, $borRa, $c, $fs, $fw, $ta, $bg, $p, $t, $b, $l, $r);
+}
+
+@mixin abs ($w: null, $maxW: null, $h: null, $maxH: null, $d: null, $ai: null, $jc: null, $fd: null, $mg: null, $mgT: null, $mgB: null, $mgL: null, $mgR: null, $pd: null, $pdT: null, $pdB: null, $pdL: null, $pdR: null, $bor: null, $borT: null, $borB: null, $borL: null, $borR: null, $borRa: null, $c: null, $fs: null, $fw: null, $ta: null, $bg: null, $p: null, $t: null, $b: null, $l: null, $r: null) {
+  $p: absolute;
+  @include css($w, $maxW, $h, $maxH, $d, $ai, $jc, $fd, $mg, $mgT, $mgB, $mgL, $mgR, $pd, $pdT, $pdB, $pdL, $pdR, $bor, $borT, $borB, $borL, $borR, $borRa, $c, $fs, $fw, $ta, $bg, $p, $t, $b, $l, $r);
+}
+
+@mixin fix ($w: null, $maxW: null, $h: null, $maxH: null, $d: null, $ai: null, $jc: null, $fd: null, $mg: null, $mgT: null, $mgB: null, $mgL: null, $mgR: null, $pd: null, $pdT: null, $pdB: null, $pdL: null, $pdR: null, $bor: null, $borT: null, $borB: null, $borL: null, $borR: null, $borRa: null, $c: null, $fs: null, $fw: null, $ta: null, $bg: null, $p: null, $t: null, $b: null, $l: null, $r: null) {
+  $p: fixed;
+  @include css($w, $maxW, $h, $maxH, $d, $ai, $jc, $fd, $mg, $mgT, $mgB, $mgL, $mgR, $pd, $pdT, $pdB, $pdL, $pdR, $bor, $borT, $borB, $borL, $borR, $borRa, $c, $fs, $fw, $ta, $bg, $p, $t, $b, $l, $r);
+}
+
+@mixin fle ($w: null, $maxW: null, $h: null, $maxH: null, $d: null, $ai: null, $jc: null, $fd: null, $mg: null, $mgT: null, $mgB: null, $mgL: null, $mgR: null, $pd: null, $pdT: null, $pdB: null, $pdL: null, $pdR: null, $bor: null, $borT: null, $borB: null, $borL: null, $borR: null, $borRa: null, $c: null, $fs: null, $fw: null, $ta: null, $bg: null, $p: null, $t: null, $b: null, $l: null, $r: null) {
+  $d: flex;
+  @include css ($w, $maxW, $h, $maxH, $d, $ai, $jc, $fd, $mg, $mgT, $mgB, $mgL, $mgR, $pd, $pdT, $pdB, $pdL, $pdR, $bor, $borT, $borB, $borL, $borR, $borRa, $c, $fs, $fw, $ta, $bg, $p, $t, $b, $l, $r);
+}
+
+$bk: black;
+$wt: white;
+$main: #04aaff;
+$sub: tomato;

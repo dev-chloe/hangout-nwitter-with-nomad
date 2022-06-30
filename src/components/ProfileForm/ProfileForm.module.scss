@@ -1,0 +1,6 @@
+@import "./function.scss";
+
+.form {
+  @include fle($fd: column, $w: 100%, $pdB: 30px,
+    $borB: 1px solid rgba(255, 255, 255, 0.9));
+}

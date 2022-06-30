@@ -1,0 +1,16 @@
+@import "./function.scss";
+
+.wrapper {
+  @include fle ($jc: center, $mg: 50px 0);
+  gap: 10px;
+
+  .icon {
+    color: $main;
+    font-size: 2em;
+  }
+
+  .profile_wrap {
+    @include fle ($ai: center, $fd: column, $mgL: 10px, $fs: 16px);
+    gap: 10px;
+  }
+}

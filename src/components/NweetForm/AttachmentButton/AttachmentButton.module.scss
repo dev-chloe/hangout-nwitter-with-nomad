@@ -1,0 +1,16 @@
+@import "./function.scss";
+
+.label {
+  color: $main;
+  cursor: pointer;
+
+  span {
+    margin-right: 10px;
+    font-size: 16px;
+  }
+}
+
+
+.not_view {
+  opacity: 0;
+}

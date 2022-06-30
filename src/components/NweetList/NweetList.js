@@ -1,6 +1,6 @@
 import Nweet from "components/Nweet/Nweet";
 import PropTypes from "prop-types";
-import style from "./NweetList.module.css";
+import style from "./NweetList.module.scss";
 
 const NweetList = ({ creatorId, nweetList }) => {
   return (

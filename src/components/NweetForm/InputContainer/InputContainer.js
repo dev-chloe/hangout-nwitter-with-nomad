@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import style from "./InputContainer.module.css";
+import style from "./InputContainer.module.scss";
 
 const InputContainer = ({ nweetText, setNweetText }) => {
   const onChange = (event) => {

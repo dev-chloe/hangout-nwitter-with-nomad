@@ -1,0 +1,18 @@
+@import "./function.scss";
+
+.btn_wrapper {
+  @include fle($jc: space-between, $w: 100%);
+  max-width: 420px;
+  gap: 10px;
+
+  .btn {
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 0px;
+    text-align: center;
+    width: 100%;
+    background: white;
+    cursor: pointer;
+  }
+}

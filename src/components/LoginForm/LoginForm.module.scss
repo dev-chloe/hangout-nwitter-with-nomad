@@ -1,0 +1,42 @@
+@import "./function.scss";
+
+.wrapper {
+  align-items: center;
+
+  .input {
+    max-width: 420px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 1);
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: black;
+
+    &.submit {
+      text-align: center;
+      background: $main;
+      color: $wt;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .switch {
+    color: $main;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    display: block;
+    font-size: 16px;
+    text-decoration: underline;
+  }
+
+  .error {
+    color: $sub;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}

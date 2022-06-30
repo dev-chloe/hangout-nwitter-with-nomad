@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import FirebaseUtil from "utils/FirebaseUtil";
 import AuthService from "services/AuthService";
-import style from "./SocialLoginButtons.module.css";
+import style from "./SocialLoginButtons.module.scss";
 
 const SocialLoginButtons = () => {
   return (

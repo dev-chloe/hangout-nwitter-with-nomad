@@ -4,7 +4,7 @@ import ProfileForm from "components/ProfileForm";
 import NweetList from "components/NweetList";
 import NweetService from "services/NweetService";
 import AuthService from "services/AuthService";
-import style from "./Profile.module.css";
+import style from "./Profile.module.scss";
 
 const Profile = ({ refreshUser, userObj }) => {
   const [nweetList, setNweetList] = useState([]);

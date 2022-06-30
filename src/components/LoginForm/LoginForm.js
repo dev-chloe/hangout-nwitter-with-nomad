@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import AuthService from "services/AuthService";
-import style from "./LoginForm.module.css";
+import style from "./LoginForm.module.scss";
 
 const LoginForm = () => {
   const [isNewAccount, setIsNewAccount] = useState(true);

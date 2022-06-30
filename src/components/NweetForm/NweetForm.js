@@ -4,7 +4,7 @@ import NweetService from "services/NweetService";
 import InputContainer from "./InputContainer";
 import AttachmentButton from "./AttachmentButton";
 import Attachment from "./Attachment";
-import style from "./NweetForm.module.css";
+import style from "./NweetForm.module.scss";
 
 const NweetForm = ({ userObj }) => {
   const [nweetText, setNweetText] = useState("");

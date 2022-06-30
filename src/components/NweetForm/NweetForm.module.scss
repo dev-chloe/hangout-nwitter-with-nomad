@@ -1,0 +1,28 @@
+@import "./function.scss";
+
+.form {
+  @include fle($ai: center, $fd: column, $w: 100%);
+
+  .attachment {
+    @include fle($jc: center, $fd: column);
+
+    img {
+      height: 80px;
+      width: 80px;
+      border-radius: 40px;
+      margin-top: 20px;
+    }
+  }
+
+  .form_clear {
+    color: $main;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+
+    span {
+      margin-right: 10px;
+      font-size: 16px;
+    }
+  }
+}

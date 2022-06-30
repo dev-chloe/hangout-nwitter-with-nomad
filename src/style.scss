@@ -1,4 +1,4 @@
-@import "https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css";
+@import "./function.scss";
 
 * {
   box-sizing: border-box;
@@ -12,19 +12,19 @@ input {
 }
 
 body {
-  background-color: black;
+  background-color: $bk;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 16px;
-  color: white;
+  color: $wt;
 }
 
 button {
-  background-color: white;
-  color: black;
+  background-color: $wt;
+  color: $bk;
   border: none;
-  cursor: pointer;
   font-size: 16px;
+  cursor: pointer;
 }
 
 a {
@@ -37,48 +37,40 @@ form {
 }
 
 .wrapper {
-  width: 100%;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  @include fle ($w: 100%, $h: 100vh, $mg: 0 auto,
+    $jc: center, $ai: center, $fd: column);
+
+  .contents_wrapper {
+    @include fle ($w: 100%, $pd: 20px,
+      $ai: center, $fd: column);
+    overflow-y: auto;
+
+    .container {
+      @include fle ($w: 100%, $fd: column);
+      max-width: 420px;
+    }
+
+    footer {
+      margin: 30px 0;
+    }
+  }
 }
 
-.contents_wrapper {
-  padding: 20px;
-  overflow-y: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-}
 
-footer {
-  margin: 30px 0;
-}
 
 .nweet-input::placeholder {
-  color: white;
+  color: $wt;
   opacity: 0.9;
-}
-
-.container {
-  width: 100%;
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
 }
 
 .form_input {
   width: 100%;
   padding: 10px 20px;
   border-radius: 20px;
-  border: 1px solid black;
+  border: 1px solid $bk;
   text-align: center;
-  background-color: white;
-  color: black;
+  background-color: $wt;
+  color: $bk;
 }
 
 .form_btn {
@@ -86,9 +78,9 @@ footer {
   width: 100%;
   padding: 11px 20px;
   text-align: center;
-  color: white;
+  color: $wt;
   border-radius: 20px;
-  background-color: #04aaff;
+  background-color: $main;
   cursor: pointer;
 }
 
@@ -98,5 +90,5 @@ footer {
 
 .cancel_btn {
   cursor: pointer;
-  background-color: tomato;
+  background-color: $sub;
 }

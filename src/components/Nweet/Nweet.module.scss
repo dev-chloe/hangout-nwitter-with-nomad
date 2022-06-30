@@ -1,0 +1,48 @@
+@import "./function.scss";
+
+.nweet {
+  @include fle ($fd: column, $p: relative,
+    $mgB: 20px, $bg: $wt, $w: 100%,
+    $pd: 20px, $borRa: 10px, $c: rgba(0, 0, 0, 0.8));
+  max-width: 420px;
+
+  &:hover {
+    .nweet_actions {
+      opacity: 1;
+    }
+  }
+
+  .nweet_edit {
+    input[type=submit] {
+      cursor: pointer;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+  }
+
+  h4 {
+    font-size: 16px;
+    padding-right: 10px;
+  }
+
+  img {
+    display: block;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .nweet_actions {
+    @include abs($r: 10px, $t: 18px);
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+}
+
+@media screen and(max-width: 600px) {
+  .nweet {
+    .nweet_actions {
+      opacity: 1;
+    }
+  }
+}

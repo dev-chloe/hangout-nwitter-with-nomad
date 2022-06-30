@@ -1,7 +1,7 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
-import style from "./Attachment.module.css";
+import style from "./Attachment.module.scss";
 
 
 const Attachment = ({ nweetImage, setNweetImage, fileInput }) => {
@@ -10,7 +10,7 @@ const Attachment = ({ nweetImage, setNweetImage, fileInput }) => {
     fileInput.current.value = null;
   };
   return (
-    <div className={style.attachment} >
+    <div className={style.attachment}>
       <img src={nweetImage} alt="img" style={{ backgroundImage: nweetImage }} />
       <button className={style.form_clear} onClick={onClearAttachment}>
         <span>Remove</span>
