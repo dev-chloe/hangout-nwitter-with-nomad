@@ -1,5 +1,5 @@
 import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
-import { firestore } from "./FirebaseRepository";
+import { firestore } from "../Firebase";
 
 const readNweetList = async (callback, creatorId) => {
   const firestoreQuery = getNweetListQuery(creatorId);

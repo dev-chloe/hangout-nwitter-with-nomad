@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
-import { auth } from "./FirebaseRepository";
+import { auth } from "../Firebase";
 
 const createNewAccount = async ({
   email,
