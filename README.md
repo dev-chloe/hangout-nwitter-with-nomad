@@ -183,6 +183,13 @@ npx create-react-app hangout-nwitter-with-nomad
 
     - check [`.eslintrc.js`](./.eslintrc.js)
 
+8. [**scss**](https://sass-lang.com/)
+
+    ```bash
+    # scss
+    npm install --save node-sass 
+    ```
+
 ## certification
 
 [![certification](certification/certification.png)](https://nomadcoders.co/certs/13aeb294-9d04-4a3c-9eff-a7952f609fc2)
