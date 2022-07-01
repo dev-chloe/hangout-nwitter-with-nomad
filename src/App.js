@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Router from "Router";
-import AuthService from "services/AuthService/AuthService";
+import AuthService from "services/AuthService";
 
 function App() {
   const [isReady, setIsReady] = useState(false);

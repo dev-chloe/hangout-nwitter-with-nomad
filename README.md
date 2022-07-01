@@ -4,6 +4,18 @@ Twitter (mini)clone with React and Firebase
 
 ## Project
 
+### How is it consist?
+
+![hangout-nwitter-with-nomad-Pinciple](https://user-images.githubusercontent.com/59247977/176869282-091285bf-1caa-4377-bdbf-fb364d728a06.jpg)
+
+- `Repository`: 외부 저장소에 실제 CRUD를 처리하는 과정을 구현하여 응집
+- `Service`: UI에서 다루어진 data를 외부 저장소와 연결하는 비지니스 로직을 응집
+- `Component`: HTML element와 props로 UI를 구성하는 기본 디자인 컴포넌트
+- `Composite Component`:  서비스 레이어로부터 얻은 data를 기본 컴포넌트와 조합하여 만든 합성 디자인 컴포넌트
+- `Routes`:  합성 디자인 컴포넌트를 조합하여 페이지를 구성하는 컴포넌트
+
+> Read more: [**Nwitter 관계도 #3**](https://github.com/dev-chloe/hangout-nwitter-with-nomad/issues/3#issue-1291173956)
+
 ### How to run?
 
 ```bash
