@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import AuthService from "services/AuthService";
 import style from "./LoginForm.module.scss";
 
 const LoginForm = () => {
   const [isNewAccount, setIsNewAccount] = useState(true);
-  const toggleForm = () => {
+  const toggleForm = useCallback(() => {
     setIsNewAccount((prev) => !prev);
-  };
+  }, [isNewAccount]);
   return (
     <Form isNewAccount={isNewAccount} toggleForm={toggleForm} />
   );
@@ -17,14 +17,14 @@ const Form = ({ isNewAccount, toggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const onChange = (event) => {
+  const onChange = useCallback((event) => {
     const { target: { name, value } } = event;
     if (name === "email") {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
     }
-  };
+  }, [email, password]);
   const onSubmit = async (event) => {
     event.preventDefault();
     if (isNewAccount) {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,20 +7,20 @@ import style from "./Nweet.module.scss";
 
 const Nweet = ({ nweetObj, isOwned }) => {
   const [editing, setEditing] = useState(false);
-  const toggleEditing = () => {
+  const toggleEditing = useCallback(() => {
     setEditing(prev => !prev);
-  };
+  }, [editing]);
 
   const [nweetText, setNweetText] = useState(nweetObj.text);
   const nweet = NweetService.getNweet({ id: nweetObj.id });
-  const submitEdittedNweet = async (event) => {
+  const submitEdittedNweet = useCallback(async (event) => {
     event.preventDefault();
     NweetService.editNweet({ nweetText, nweet }, () => setEditing(false));
-  };
-  const typeToEditNweet = (event) => {
+  }, [editing]);
+  const typeToEditNweet = useCallback((event) => {
     const { target: { value } } = event;
     setNweetText(value);
-  };
+  }, [nweetText]);
 
   const editModeData = {
     toggleEditing,
@@ -67,12 +67,12 @@ const NweeEditMode = ({ editProps }) => {
 
 const NweetDisplayMode = ({ displayProps }) => {
   const { isOwned, toggleEditing, nweet, nweetText, nweetImgUrl } = displayProps;
-  const onDeleteClick = async () => {
+  const onDeleteClick = useCallback(async () => {
     const confirmedRemoveNweet = window.confirm("Are you sure you want to delete this nweet?");
     if (confirmedRemoveNweet) {
       NweetService.removeNweet(nweet, nweetImgUrl);
     }
-  };
+  }, [nweet, nweetImgUrl]);
   return (
     <>
       <h4>{nweetText}</h4>

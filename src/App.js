@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Router from "Router";
 import AuthService from "services/AuthService";
 
@@ -7,7 +7,7 @@ function App() {
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
 
-  const refreshUser = () => {
+  const refreshUser = useCallback(() => {
     AuthService.refresh((user) => {
       setIsReady(true);
       if (user) {
@@ -25,7 +25,7 @@ function App() {
       setisLoggedIn(false);
       setUserObj(null);
     });
-  };
+  }, [userObj]);
   useEffect(() => {
     refreshUser();
   }, []);
