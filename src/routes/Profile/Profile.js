@@ -4,25 +4,25 @@ import ProfileForm from "components/ProfileForm";
 import NweetList from "components/NweetList";
 import NweetService from "services/NweetService";
 import LogoutButton from "components/LogoutButton";
+import { useSelector } from "react-redux";
 
-const Profile = ({ refreshUser, userObj }) => {
+const Profile = ({ refreshUser }) => {
   const [nweetList, setNweetList] = useState([]);
-  const creatorId = userObj.uid;
+  const creatorId = useSelector((state) => state.user.uid);
   useEffect(() => {
     NweetService.getNweetListByCreatorID({ creatorId, setNweetList });
   }, []);
   return (
     <div className="container">
-      <ProfileForm userObj={userObj} callAfterUpdateProfile={refreshUser} />
+      <ProfileForm callAfterUpdateProfile={refreshUser} />
       <LogoutButton refreshUser={refreshUser} />
-      <NweetList creatorId={creatorId} nweetList={nweetList} />
+      <NweetList nweetList={nweetList} />
     </div>
   );
 };
 
 Profile.propTypes = {
-  refreshUser: PropTypes.func.isRequired,
-  userObj: PropTypes.object.isRequired
+  refreshUser: PropTypes.func.isRequired
 };
 
 export default Profile;

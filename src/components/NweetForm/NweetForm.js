@@ -1,12 +1,13 @@
 import { useRef, useState } from "react";
-import PropTypes from "prop-types";
 import NweetService from "services/NweetService";
 import InputContainer from "./InputContainer";
 import AttachmentButton from "./AttachmentButton";
 import Attachment from "./Attachment";
 import style from "./NweetForm.module.scss";
+import { useSelector } from "react-redux";
 
-const NweetForm = ({ userObj }) => {
+const NweetForm = () => {
+  const userId = useSelector((state)=> state.user.uid);
   const [nweetText, setNweetText] = useState("");
   const [nweetImage, setNweetImage] = useState("");
   const fileInput = useRef();
@@ -17,7 +18,7 @@ const NweetForm = ({ userObj }) => {
     }
     event.preventDefault();
     NweetService.addNewNweet(
-      { uid: userObj.uid, nweetText, nweetImage },
+      { uid: userId, nweetText, nweetImage },
       () => {
         setNweetText("");
         setNweetImage("");
@@ -42,10 +43,6 @@ const NweetForm = ({ userObj }) => {
       </form>
     </>
   );
-};
-
-NweetForm.propTypes = {
-  userObj: PropTypes.object.isRequired
 };
 
 export default NweetForm;

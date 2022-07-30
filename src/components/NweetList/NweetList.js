@@ -1,8 +1,10 @@
 import Nweet from "components/Nweet/Nweet";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import style from "./NweetList.module.scss";
 
-const NweetList = ({ creatorId, nweetList }) => {
+const NweetList = ({ nweetList }) => {
+  const creatorId = useSelector((state) => state.user.uid);
   return (
     <div className={style.wrapper}>
       {nweetList.map((nweet) => (
@@ -17,7 +19,6 @@ const NweetList = ({ creatorId, nweetList }) => {
 };
 
 NweetList.propTypes = {
-  creatorId: PropTypes.string.isRequired,
   nweetList: PropTypes.array.isRequired
 };
 

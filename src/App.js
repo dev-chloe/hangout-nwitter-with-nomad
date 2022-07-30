@@ -1,31 +1,33 @@
 import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Router from "Router";
 import AuthService from "services/AuthService";
+import { userLogout, userUpdate } from "services/AuthService/userSlice";
 
 function App() {
   const [isReady, setIsReady] = useState(false);
   const [isLoggedIn, setisLoggedIn] = useState(false);
-  const [userObj, setUserObj] = useState(null);
+
+  useSelector((state)=> state.user);
+  const dispatch = useDispatch();
 
   const refreshUser = useCallback(() => {
-    AuthService.refresh((user) => {
+    AuthService.refresh((refreshedUser) => {
       setIsReady(true);
-      if (user) {
+      if (refreshedUser) {
         setisLoggedIn(true);
-        setUserObj({
-          displayName: user.displayName ?? user.email.split("@")[0],
-          uid: user.uid,
-          email: user.email,
-          updateProfile: () => AuthService.saveProfile({
-            displayName: user.displayName
-          })
-        });
+        const userPayload = {
+          displayName: refreshedUser.displayName ?? refreshedUser.email.split("@")[0],
+          uid: refreshedUser.uid,
+          email: refreshedUser.email
+        };
+        dispatch(userUpdate(userPayload));
         return;
       }
       setisLoggedIn(false);
-      setUserObj(null);
+      dispatch(userLogout());
     });
-  }, [userObj]);
+  }, []);
   useEffect(() => {
     refreshUser();
   }, []);
@@ -36,7 +38,6 @@ function App() {
           <Router
             refreshUser={refreshUser}
             isLoggedIn={isLoggedIn}
-            userObj={userObj}
           />
           :
           "Initializing..."

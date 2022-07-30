@@ -2,9 +2,10 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import AuthService from "services/AuthService";
 import style from "./ProfileForm.module.scss";
+import { useSelector } from "react-redux";
 
-const ProfileForm = ({ userObj, callAfterUpdateProfile }) => {
-  const oldDisplayName = userObj.displayName;
+const ProfileForm = ({ callAfterUpdateProfile }) => {
+  const oldDisplayName = useSelector((state) => state.user.displayName);
   const [newDisplayName, setNewDisplayName] = useState(oldDisplayName);
 
   const onChange = (event) => {
@@ -40,7 +41,6 @@ const ProfileForm = ({ userObj, callAfterUpdateProfile }) => {
 };
 
 ProfileForm.propTypes = {
-  userObj: PropTypes.object.isRequired,
   callAfterUpdateProfile: PropTypes.func.isRequired
 };
 
